@@ -58,10 +58,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 export async function getStaticPaths() {
 	const menus = await marbleClient.get('/menus')
-	const menuId = menus[0].menuId
+	const menuId = menus.data.results[0].id
 	await loadNormalizedMenu(menuId)
 	const subcategories = getAllSubcategoryIds()
-	const paths = subcategories.map(subcategoryId => ({ menuId, subcategoryId }))
+	const paths = subcategories.map(subcategoryId => ({
+		params: { menuId, subcategoryId },
+	}))
 
 	return {
 		paths,

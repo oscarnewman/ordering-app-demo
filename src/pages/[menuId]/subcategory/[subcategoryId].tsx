@@ -1,5 +1,9 @@
 import marbleClient from '@/api/client'
-import { getSubcategoryData, loadNormalizedMenu } from '@/api/menu'
+import {
+	getAllSubcategoryIds,
+	getSubcategoryData,
+	loadNormalizedMenu,
+} from '@/api/menu'
 import Nav from '@/components/Nav'
 import BaseLayout from '@/layout/BaseLayout'
 import { GetStaticPropsContext } from 'next'
@@ -53,15 +57,14 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 export async function getStaticPaths() {
-	// const menus = await marbleClient.get('/menus')
-	// const paths = menus.data.results.subcategories.map((result) => ({
-	// 	params: {
-	// 		menuId: result.id,
-	// 	},
-	// }))
+	const menus = await marbleClient.get('/menus')
+	const menuId = menus[0].menuId
+	await loadNormalizedMenu(menuId)
+	const subcategories = getAllSubcategoryIds()
+	const paths = subcategories.map(subcategoryId => ({ menuId, subcategoryId }))
 
 	return {
-		paths: [],
+		paths,
 		fallback: true,
 	}
 }

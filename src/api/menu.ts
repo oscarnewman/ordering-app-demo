@@ -45,3 +45,7 @@ export function getSubcategoryData(subcategoryId) {
 	})
 	return subcategory
 }
+
+export function getAllSubcategoryIds() {
+	return Object.keys(menuById.subcategories)
+}

@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { useCallback, useMemo } from 'react'
 import Stack from '@/components/Stack'
 import Link from 'next/link'
+import { getHomepageData, loadNormalizedMenu } from '@/api/menu'
 
 function MenuItem({ item }) {
 	const isSubcategory = useMemo(() => Boolean(item.items), [item])
@@ -40,40 +41,31 @@ function MenuItem({ item }) {
 	)
 }
 
-export default function Index({ menu }) {
+export default function Index({ categories }) {
 	const router = useRouter()
 
 	if (router.isFallback) {
 		return <div>Loading menu...</div>
 	}
 
-	const findInMenu = useCallback(
-		(resource, resourceId) => {
-			return menu[resource].find(({ id }) => id === resourceId)
-		},
-		[menu]
-	)
-
 	return (
 		<BaseLayout>
 			<Nav />
-			<CategoryTabs categories={menu.categories} />
+			<CategoryTabs categories={categories} />
 			<div className="relative">
-				{menu.categories.map((category) => (
+				{categories.map(category => (
 					<div key={category.id} id={category.name} className="relative">
 						<h2 className="font-bold text-lg sticky top-0 bg-white w-full border-b py-2 z-10">
 							{category.name}
 						</h2>
 						<Stack divider>
 							{!category.useSubcategories &&
-								category.items.map((itemId) => {
-									const item = findInMenu('items', itemId)
+								category.items.map(item => {
 									return <MenuItem key={item.id} item={item} />
 								})}
 
 							{category.useSubcategories &&
-								category.subcategories.map((subcategoryId) => {
-									const subcategory = findInMenu('subcategories', subcategoryId)
+								category.subcategories.map(subcategory => {
 									return <MenuItem key={subcategory.id} item={subcategory} />
 								})}
 						</Stack>
@@ -87,12 +79,12 @@ export default function Index({ menu }) {
 export async function getStaticProps(context: GetStaticPropsContext) {
 	const { menuId } = context.params
 
-	const result = await marbleClient.get(`/menus/${menuId}/formatted`)
-	const menu = result.data
+	await loadNormalizedMenu(menuId as string)
+	const menu = getHomepageData()
 
 	return {
 		props: {
-			menu,
+			categories: menu,
 		},
 		revalidate: 60,
 	}
@@ -100,7 +92,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 export async function getStaticPaths() {
 	const menus = await marbleClient.get('/menus')
-	const paths = menus.data.results.map((result) => ({
+	const paths = menus.data.results.map(result => ({
 		params: {
 			menuId: result.id,
 		},

@@ -54,7 +54,11 @@ export default function Index({ categories }) {
 			<CategoryTabs categories={categories} />
 			<div className="relative">
 				{categories.map(category => (
-					<div key={category.id} id={category.name} className="relative">
+					<div
+						key={category.id}
+						id={encodeURIComponent(category.id)}
+						className="relative"
+					>
 						<h2 className="font-bold text-lg sticky top-0 bg-white w-full border-b py-2 z-10">
 							{category.name}
 						</h2>

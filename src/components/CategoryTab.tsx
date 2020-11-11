@@ -11,7 +11,7 @@ export default function CategoryTab({ category, active }: Props) {
 	const handleClick = e => {
 		e.preventDefault()
 		document
-			.querySelector(`#${encodeURIComponent(category.id)}`)
+			.querySelector(`#${category.id}`)
 			.scrollIntoView({ behavior: 'smooth' })
 	}
 	return (

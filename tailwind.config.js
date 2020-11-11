@@ -8,6 +8,12 @@ module.exports = {
 	// purge: ['./src/**/*.html', './src/**/*.tsx'],
 	theme: {
 		extend: {
+			screens: {
+				'content-xs': '20rem',
+				'content-sm': '24rem',
+				'content-md': '28rem',
+				'content-lg': '32rem',
+			},
 			spacing: {
 				'1/2': '50%',
 				'2/3': '66.666%',

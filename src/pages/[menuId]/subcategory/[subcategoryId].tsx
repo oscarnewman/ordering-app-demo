@@ -15,15 +15,15 @@ export default function Subcategory({ subcategory }) {
 	const router = useRouter()
 
 	return (
-		<BaseLayout padding={false}>
-			<div className="px-4 sm:px-0">
+		<BaseLayout noPadding>
+			<div className="px-4 content-lg:px-0">
 				<Nav back menuId={router.query.menuId as string} />
 			</div>
 			{router.isFallback ? (
 				'Loading Item...'
 			) : (
 				<Stack space={8}>
-					<div className="relative w-full pb-2/3 shadow-xl rounded overflow-hidden block">
+					<div className="relative w-full pb-2/3 shadow-xl rounded-none content-lg:rounded overflow-hidden block">
 						<Image
 							src={subcategory.image}
 							layout="fill"
@@ -32,7 +32,7 @@ export default function Subcategory({ subcategory }) {
 							className="object-cover object-center"
 						/>
 					</div>
-					<div className="px-4 sm:px-0">
+					<div className="px-4 content-lg:px-0">
 						<h1 className="font-bold text-lg">{subcategory.name}</h1>
 						<p className="text-gray-700">{subcategory.description}</p>
 					</div>
@@ -57,16 +57,16 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 export async function getStaticPaths() {
-	const menus = await marbleClient.get('/menus')
-	const menuId = menus.data.results[0].id
-	await loadNormalizedMenu(menuId)
-	const subcategories = getAllSubcategoryIds()
-	const paths = subcategories.map(subcategoryId => ({
-		params: { menuId, subcategoryId },
-	}))
+	// const menus = await marbleClient.get('/menus')
+	// const menuId = menus.data.results[0].id
+	// await loadNormalizedMenu(menuId)
+	// const subcategories = getAllSubcategoryIds()
+	// const paths = subcategories.map(subcategoryId => ({
+	// 	params: { menuId, subcategoryId },
+	// }))
 
 	return {
-		paths,
+		paths: [],
 		fallback: true,
 	}
 }

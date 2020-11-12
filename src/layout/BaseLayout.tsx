@@ -9,7 +9,7 @@ interface Props {
 export default function BaseLayout({ children, noPadding = false }: Props) {
 	return (
 		<div
-			className={classNames('max-w-lg mx-auto', {
+			className={classNames('max-w-lg mx-auto relative', {
 				'px-4 content-lg:px-0': !noPadding,
 			})}
 		>

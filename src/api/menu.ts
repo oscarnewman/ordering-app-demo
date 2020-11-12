@@ -1,4 +1,6 @@
+import { denormalize } from 'normalizr'
 import { marbleClient } from './client'
+import { marbleSchema } from './schema'
 
 let menu = null
 const menuById: any = {}
@@ -37,15 +39,17 @@ export function getHomepageData() {
 	})
 }
 
+function hydrate(resource, id) {
+	return denormalize({ [resource]: [id] }, marbleSchema, menuById)[resource][0]
+}
+
 export function getSubcategoryData(subcategoryId) {
-	const subcategory = { ...menuById.subcategories[subcategoryId] }
-	subcategory.items = subcategory.items.map(itemId => {
-		const item = menuById.items[itemId]
-		return item
-	})
-	return subcategory
+	return hydrate('subcategories', subcategoryId)
 }
 
 export function getAllSubcategoryIds() {
 	return Object.keys(menuById.subcategories)
+}
+export function getItemData(itemId) {
+	return hydrate('items', itemId)
 }

@@ -1,5 +1,6 @@
 import { Category } from '@/types'
 import classNames from 'classnames'
+import { useState } from 'react'
 
 interface Props {
 	category: Category
@@ -7,21 +8,25 @@ interface Props {
 	onClick: () => void
 }
 
-export default function CategoryTab({ category, active }: Props) {
+export default function CategoryTab({ category, onClick, active }: Props) {
 	const handleClick = e => {
 		e.preventDefault()
-		document
-			.querySelector(`#${category.id}`)
-			.scrollIntoView({ behavior: 'smooth' })
+
+		const element = document.getElementById(category.id)
+		const paddingHeight = document.getElementById('#fixed-nav').offsetHeight
+		const amountToScroll = element.offsetTop - paddingHeight
+		window.scroll({ top: amountToScroll, behavior: 'smooth' })
+		onClick()
 	}
+
 	return (
 		<a
 			onClick={handleClick}
 			href={`#${category.name}`}
-			className={classNames('whitespace-no-wrap px-2 py-2 rounded text-sm', {
-				'text-white bg-gray-900': active,
-				'text-gray-600': !active,
-			})}
+			className={classNames(
+				'cursor-pointer whitespace-no-wrap px-2 py-2 rounded text-sm',
+				{ 'text-gray-600': !active, 'text-white bg-gray-900': active }
+			)}
 		>
 			{category.name}
 		</a>

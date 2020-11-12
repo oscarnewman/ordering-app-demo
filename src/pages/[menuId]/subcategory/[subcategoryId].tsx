@@ -4,6 +4,7 @@ import {
 	getSubcategoryData,
 	loadNormalizedMenu,
 } from '@/api/menu'
+import { ArrowRightIcon } from '@/components/icons'
 import ModifierSetSelection from '@/components/ModifierSetSelection'
 import Nav from '@/components/Nav'
 import Stack from '@/components/Stack'
@@ -87,8 +88,11 @@ export default function Subcategory({ subcategory }) {
 					</Padding>
 					<div className="pb-8 sticky bottom-0 flex justify-stretch items-center">
 						<button className="bg-indigo-700 w-full text-white font-medium shadow-xl rounded px-4 py-2 flex justify-between">
-							<div>Add to Cart</div>
-							<div className="text-indigo-200 font-normal">$19.99</div>
+							<div className="flex items-center">
+								Add to Cart
+								<div className="text-indigo-200 font-normal ml-3">$19.99</div>
+							</div>
+							<ArrowRightIcon className="w-6 text-white" />
 						</button>
 					</div>
 				</Stack>

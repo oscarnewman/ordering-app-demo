@@ -5,7 +5,7 @@ module.exports = {
 		defaultLineHeights: true,
 		standardFontWeights: true,
 	},
-	purge: ['./src/**/*.html', './src/**/*.tsx'],
+	// purge: ['./src/**/*.html', './src/**/*.tsx'],
 	theme: {
 		extend: {
 			screens: {

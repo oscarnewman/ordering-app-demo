@@ -85,6 +85,12 @@ export default function Subcategory({ subcategory }) {
 							</Stack>
 						</Stack>
 					</Padding>
+					<div className="pb-8 sticky bottom-0 flex justify-stretch items-center">
+						<button className="bg-indigo-700 w-full text-white font-medium shadow-xl rounded px-4 py-2 flex justify-between">
+							<div>Add to Cart</div>
+							<div className="text-indigo-200 font-normal">$19.99</div>
+						</button>
+					</div>
 				</Stack>
 			)}
 		</BaseLayout>

@@ -18,19 +18,21 @@ import { useMemo, useState } from 'react'
 export default function Subcategory({ subcategory }) {
 	const router = useRouter()
 
-	if (!subcategory.items) {
-		return <div>ayyyy</div>
-	}
+	if (!subcategory) return <div>Not here...</div>
 
-	const [itemId, setItemId] = useState(subcategory.items[0].id)
+	const hasItems = subcategory.items && subcategory.items.length > 0
+
+	const [itemId, setItemId] = useState(
+		hasItems ? subcategory.items[0].id : null
+	)
 
 	const item = useMemo(
-		() => subcategory.items.find(({ id }) => id === itemId),
+		() => (itemId ? subcategory.items.find(({ id }) => id === itemId) : null),
 		[itemId]
 	)
 
 	const modifierSets = useMemo(() => {
-		return item.modifierSets || []
+		return item ? item.modifierSets || [] : []
 	}, [item, subcategory])
 
 	return (
@@ -43,13 +45,15 @@ export default function Subcategory({ subcategory }) {
 			) : (
 				<Stack space={8}>
 					<div className="relative w-full pb-2/3 shadow-xl rounded-none content-lg:rounded overflow-hidden block">
-						<Image
-							src={subcategory.image}
-							layout="fill"
-							priority
-							sizes="100%, 50%, 25%"
-							className="object-cover object-center"
-						/>
+						{subcategory.image && (
+							<Image
+								src={subcategory.image}
+								layout="fill"
+								priority
+								sizes="100%, 50%, 25%"
+								className="object-cover object-center"
+							/>
+						)}
 					</div>
 					<Padding>
 						<Stack space={4}>

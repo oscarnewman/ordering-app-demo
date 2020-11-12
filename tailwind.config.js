@@ -5,7 +5,14 @@ module.exports = {
 		defaultLineHeights: true,
 		standardFontWeights: true,
 	},
-	// purge: ['./src/**/*.html', './src/**/*.tsx'],
+	purge: {
+		content: ['./src/**/*.html', './src/**/*.tsx'],
+		whitelist: theme =>
+			theme('spacing').reduce(
+				(all, cur) => [...all, `space-x-${cur}`, `space-y-${cur}`],
+				[]
+			),
+	},
 	theme: {
 		extend: {
 			screens: {

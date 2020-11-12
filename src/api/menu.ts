@@ -48,7 +48,11 @@ export function getSubcategoryData(subcategoryId) {
 }
 
 export function getAllSubcategoryIds() {
-	return Object.keys(menuById.subcategories)
+	const subcategories = menu.categories.reduce(
+		(ids, category) => [...ids, ...category.subcategories],
+		[]
+	)
+	return subcategories
 }
 export function getItemData(itemId) {
 	return hydrate('items', itemId)

@@ -18,6 +18,10 @@ import { useMemo, useState } from 'react'
 export default function Subcategory({ subcategory }) {
 	const router = useRouter()
 
+	if (!subcategory) {
+		return 'uh oh 404'
+	}
+
 	const [itemId, setItemId] = useState(subcategory.items[0].id)
 
 	const item = useMemo(
@@ -98,16 +102,16 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 export async function getStaticPaths() {
-	const menus = await marbleClient.get('/menus')
-	const menuId = menus.data.results[0].id
-	await loadNormalizedMenu(menuId)
-	const subcategories = getAllSubcategoryIds()
-	const paths = subcategories.map(subcategoryId => ({
-		params: { menuId, subcategoryId },
-	}))
+	// const menus = await marbleClient.get('/menus')
+	// const menuId = menus.data.results[0].id
+	// await loadNormalizedMenu(menuId)
+	// const subcategories = getAllSubcategoryIds()
+	// const paths = subcategories.map(subcategoryId => ({
+	// 	params: { menuId, subcategoryId },
+	// }))
 
 	return {
-		paths,
+		paths: [],
 		fallback: true,
 	}
 }

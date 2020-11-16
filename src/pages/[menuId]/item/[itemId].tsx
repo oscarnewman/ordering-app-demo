@@ -5,7 +5,7 @@ import BaseLayout from '@/layout/BaseLayout'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import Stack from '@/components/Stack'
+import Stack from '@/components/ui/Stack'
 
 export default function Item({ item }) {
 	const router = useRouter()

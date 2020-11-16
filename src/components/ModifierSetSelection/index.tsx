@@ -1,17 +1,17 @@
-import { ModifierSet } from '@/types'
-import { useCallback, useState } from 'react'
-import Stack from '../Stack'
+import { ModifierSet, Modifier } from '@/types'
+import { useCallback, useEffect, useState } from 'react'
+import Stack from '../ui/Stack'
 import ModifierRow from './ModifierRow'
 
 interface Props {
 	modifierSet: ModifierSet
+	onSelect: (modifierIds: string[]) => void
 }
 
-const ModifierSetSelection = ({ modifierSet }: Props) => {
+const ModifierSetSelection = ({ modifierSet, onSelect }: Props) => {
 	const [selected, setSelected] = useState(modifierSet.preselectedModifiers)
 
 	const handleClick = modifierId => {
-		console.log(modifierSet.min, modifierSet.max, selected)
 		if (modifierSet.max === 1 && modifierSet.min === 1) {
 			setSelected([modifierId])
 		} else if (
@@ -28,6 +28,10 @@ const ModifierSetSelection = ({ modifierSet }: Props) => {
 			setSelected([...selected, modifierId])
 		}
 	}
+
+	useEffect(() => {
+		onSelect(selected)
+	}, [selected])
 
 	const isSelected = useCallback(id => selected.includes(id), [selected])
 

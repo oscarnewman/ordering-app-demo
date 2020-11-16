@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useMemo } from 'react'
-import Stack from '@/components/Stack'
+import Stack from '@/components/ui/Stack'
 import Link from 'next/link'
 
 export function MenuItem({ item }) {

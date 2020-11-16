@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ArrowLeftIcon, ShoppingBagIcon } from './icons'
+import { ArrowLeftIcon, ShoppingBagIcon } from './ui/icons'
 
 interface Props {
 	back?: boolean

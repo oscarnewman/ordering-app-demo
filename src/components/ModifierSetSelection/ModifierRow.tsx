@@ -1,6 +1,7 @@
 import { Modifier } from '@/types'
 import { formatMinorAmmount } from '@/util/currency'
 import classNames from 'classnames'
+import { PlusIcon } from '../ui/icons'
 
 interface Props {
 	modifier: Modifier
@@ -10,7 +11,7 @@ interface Props {
 const ModifierRow = ({ modifier, selected = false, onClick }: Props) => {
 	return (
 		<button
-			className="py-2 flex justify-between items-center"
+			className="py-2 flex justify-between items-center focus:outline-none"
 			onClick={() => onClick(modifier.id)}
 		>
 			<div className="flex items-center">
@@ -20,11 +21,21 @@ const ModifierRow = ({ modifier, selected = false, onClick }: Props) => {
 						'bg-indigo-600 border-indigo-200': selected,
 					})}
 				/>
-				<p className={classNames({ 'text-indigo-800': selected })}>
+				<p
+					className={classNames({
+						'text-indigo-800': selected,
+						'text-gray-500': !selected,
+					})}
+				>
 					{modifier.name}
 				</p>
 			</div>
-			<p>{formatMinorAmmount(modifier.amount)}</p>
+			{modifier.amount > 0 && (
+				<p className="flex items-center text-gray-700">
+					<PlusIcon className="w-4 text-gray-700" />
+					{formatMinorAmmount(modifier.amount)}
+				</p>
+			)}
 		</button>
 	)
 }

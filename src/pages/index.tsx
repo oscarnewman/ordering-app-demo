@@ -1,6 +1,4 @@
-import { ShoppingBagIcon } from '@/components/icons'
 import Nav from '@/components/Nav'
-import Stack from '@/components/Stack'
 
 export default function Home() {
 	return (

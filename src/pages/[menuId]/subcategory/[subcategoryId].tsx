@@ -4,12 +4,13 @@ import {
 	getSubcategoryData,
 	loadNormalizedMenu,
 } from '@/api/menu'
-import { ArrowRightIcon } from '@/components/icons'
+import FixedTopbar from '@/components/FixedTopbar'
 import ModifierSetSelection from '@/components/ModifierSetSelection'
-import Nav from '@/components/Nav'
-import Stack from '@/components/Stack'
+import { ArrowRightIcon } from '@/components/ui/icons'
+import Stack from '@/components/ui/Stack'
 import BaseLayout from '@/layout/BaseLayout'
 import Padding from '@/layout/Padding'
+import { Modifier } from '@/types'
 import { formatMinorAmmount } from '@/util/currency'
 import { GetStaticPropsContext } from 'next'
 import Image from 'next/image'
@@ -32,15 +33,47 @@ export default function Subcategory({ subcategory }) {
 		[itemId]
 	)
 
-	const modifierSets = useMemo(() => {
-		return item ? item.modifierSets || [] : []
-	}, [item, subcategory])
+	const modifierSets = useMemo(() => item.modifierSets, [item, subcategory])
+
+	const modifiers = useMemo(
+		() =>
+			modifierSets
+				.flatMap(({ modifiers }) => modifiers)
+				.reuce((all, current) => ({ ...all, [current.id]: current })),
+		[modifierSets]
+	)
+
+	const [selectedModifiers, setSelectedModifiers] = useState({})
+	const total = useMemo(() => {
+		if (!item) return null
+		const itemPrice = item.amount
+
+		const modifierPrice = Object.keys(selectedModifiers).reduce(
+			(total, modifierSetId) => {
+				const selections = selectedModifiers[modifierSetId].map(
+					id => modifiers[id]
+				)
+				const price = selections.reduce(
+					(total, modifier) => total + modifier.amount,
+					0
+				)
+				return total + price
+			},
+			0
+		)
+
+		return itemPrice + modifierPrice
+	}, [item, selectedModifiers])
+
+	const handleModifierSelection = (modiferSetId: string) => (
+		modifierIds: string[]
+	) => {
+		setSelectedModifiers({ ...selectedModifiers, [modiferSetId]: modifierIds })
+	}
 
 	return (
 		<BaseLayout noPadding>
-			<div className="px-4 content-lg:px-0">
-				<Nav back menuId={router.query.menuId as string} />
-			</div>
+			<FixedTopbar back menuId={router.query.menuId as string} />
 			{router.isFallback ? (
 				'Loading Item...'
 			) : (
@@ -57,7 +90,7 @@ export default function Subcategory({ subcategory }) {
 						)}
 					</div>
 					<Padding>
-						<Stack space={4}>
+						<Stack space={8}>
 							<Stack space={2}>
 								<h1 className="font-bold text-lg">{subcategory.name}</h1>
 								<p className="text-gray-700">{subcategory.description}</p>
@@ -76,11 +109,12 @@ export default function Subcategory({ subcategory }) {
 									))}
 								</select>
 							</label>
-							<Stack space={12}>
+							<Stack space={4}>
 								{modifierSets.map(modifierSet => (
 									<ModifierSetSelection
 										modifierSet={modifierSet}
 										key={modifierSet.id}
+										onSelect={handleModifierSelection(modifierSet.id)}
 									/>
 								))}
 							</Stack>
@@ -90,7 +124,9 @@ export default function Subcategory({ subcategory }) {
 						<button className="bg-indigo-700 w-full text-white font-medium shadow-xl rounded px-4 py-2 flex justify-between">
 							<div className="flex items-center">
 								Add to Cart
-								<div className="text-indigo-200 font-normal ml-3">$19.99</div>
+								<div className="text-indigo-200 font-normal ml-3">
+									{formatMinorAmmount(total)}
+								</div>
 							</div>
 							<ArrowRightIcon className="w-6 text-white" />
 						</button>

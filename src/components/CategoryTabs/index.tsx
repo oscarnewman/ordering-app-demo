@@ -1,7 +1,7 @@
 import { Category } from '@/types'
 import { useEffect, useRef, useState } from 'react'
 import CategoryTab from './CategoryTab'
-import Stack from './Stack'
+import Stack from '../ui/Stack'
 
 interface Props {
 	categories: Category[]

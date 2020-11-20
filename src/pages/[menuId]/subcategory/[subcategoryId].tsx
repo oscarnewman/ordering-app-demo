@@ -39,7 +39,7 @@ export default function Subcategory({ subcategory }) {
 		() =>
 			modifierSets
 				.flatMap(({ modifiers }) => modifiers)
-				.reuce((all, current) => ({ ...all, [current.id]: current })),
+				.reduce((all, current) => ({ ...all, [current.id]: current }), {}),
 		[modifierSets]
 	)
 

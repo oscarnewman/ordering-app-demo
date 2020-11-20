@@ -98,7 +98,7 @@ export default function Subcategory({ subcategory }) {
 							<label className="block mt-4">
 								<span className="text-gray-700">Type</span>
 								<select
-									className="form-select mt-1 block w-full"
+									className="mt-1 block w-full border-gray-200 rounded"
 									value={itemId}
 									onChange={e => setItemId(e.target.value)}
 								>

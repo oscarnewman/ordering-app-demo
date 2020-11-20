@@ -34,8 +34,5 @@ module.exports = {
 	variants: {
 		borderWidth: ['hover'],
 	},
-	plugins: [
-		require('@tailwindcss/typography'),
-		require('@tailwindcss/custom-forms'),
-	],
+	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }

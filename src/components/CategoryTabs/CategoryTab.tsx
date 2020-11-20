@@ -24,7 +24,7 @@ export default function CategoryTab({ category, onClick, active }: Props) {
 			onClick={handleClick}
 			href={`#${category.name}`}
 			className={classNames(
-				'cursor-pointer whitespace-no-wrap px-2 py-2 rounded text-sm',
+				'cursor-pointer whitespace-no-wrap px-2 py-2 rounded text-sm flex-shrink-0',
 				{ 'text-gray-600': !active, 'text-white bg-gray-900': active }
 			)}
 		>

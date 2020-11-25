@@ -10,7 +10,7 @@ interface Props {
 }
 const Stack = ({
 	children,
-	space = '0',
+	space = 0,
 	divider = false,
 	row = false,
 	className,
@@ -20,7 +20,12 @@ const Stack = ({
 		<div
 			className={classNames(
 				'flex',
-				{ 'flex-col': !row, 'flex-row': row, 'divide-y': divider },
+				{
+					'flex-col': !row,
+					'flex-row': row,
+					'divide-y': divider && !row,
+					'divide-x': divider && row,
+				},
 				`space-${row ? 'x' : 'y'}-${space}`,
 				className
 			)}

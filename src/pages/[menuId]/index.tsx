@@ -8,8 +8,10 @@ import Stack from '@/components/ui/Stack'
 import { getHomepageData, loadNormalizedMenu } from '@/api/menu'
 import Padding from '@/layout/Padding'
 import { MenuItem } from '../../components/MenuItem'
+import { getLocationSettings } from '@/api/location'
+import { ThemeProvider } from '@/context/theme'
 
-export default function Index({ categories }) {
+export default function Index({ categories, settings }) {
 	const router = useRouter()
 
 	if (router.isFallback) {
@@ -17,51 +19,59 @@ export default function Index({ categories }) {
 	}
 
 	return (
-		<BaseLayout noPadding>
-			<div
-				className="sticky top-0 w-full max-w-lg bg-white z-10 border-b"
-				id="#fixed-nav"
-			>
-				<Padding>
-					<Nav />
-					<CategoryTabs categories={categories} />
-				</Padding>
-			</div>
-			<Padding>
-				<div className="overflow-y-scroll h-full overflow-scroll">
-					{categories.map(category => (
-						<div key={category.id} id={category.id}>
-							<h2 className="font-bold text-lg sticky top-0 bg-white w-full border-b py-2 ">
-								{category.name}
-							</h2>
-							<Stack divider>
-								{!category.useSubcategories &&
-									category.items.map(item => {
-										return <MenuItem key={item.id} item={item} />
-									})}
-
-								{category.useSubcategories &&
-									category.subcategories.map(subcategory => {
-										return <MenuItem key={subcategory.id} item={subcategory} />
-									})}
-							</Stack>
-						</div>
-					))}
+		<ThemeProvider value={settings}>
+			<BaseLayout noPadding>
+				<div
+					className="sticky top-0 w-full max-w-lg bg-white z-10 border-b"
+					id="#fixed-nav"
+				>
+					<Padding>
+						<Nav />
+						<CategoryTabs categories={categories} />
+					</Padding>
 				</div>
-			</Padding>
-		</BaseLayout>
+				<Padding>
+					<div className="overflow-y-scroll h-full overflow-scroll">
+						{categories.map(category => (
+							<div key={category.id} id={category.id}>
+								<h2 className="font-bold text-lg sticky top-0 bg-white w-full border-b py-2 ">
+									{category.name}
+								</h2>
+								<Stack divider>
+									{!category.useSubcategories &&
+										category.items.map(item => {
+											return <MenuItem key={item.id} item={item} />
+										})}
+
+									{category.useSubcategories &&
+										category.subcategories.map(subcategory => {
+											return (
+												<MenuItem key={subcategory.id} item={subcategory} />
+											)
+										})}
+								</Stack>
+							</div>
+						))}
+					</div>
+				</Padding>
+			</BaseLayout>
+		</ThemeProvider>
 	)
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
 	const { menuId } = context.params
 
-	await loadNormalizedMenu(menuId as string)
+	const menuPromise = loadNormalizedMenu(menuId as string)
+	const settingsPromise = getLocationSettings(menuId as string)
+
+	const results = await Promise.all([menuPromise, settingsPromise])
 	const menu = getHomepageData()
 
 	return {
 		props: {
 			categories: menu,
+			settings: results[1],
 		},
 		revalidate: 60,
 	}

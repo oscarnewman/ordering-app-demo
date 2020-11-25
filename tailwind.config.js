@@ -16,6 +16,13 @@ module.exports = {
 	// },
 	theme: {
 		extend: {
+			colors: {
+				theme: {
+					primary: 'var(--theme-primary)',
+					secondary: 'var(--theme-secondary)',
+					tertiary: 'var(--theme-tertiary)',
+				},
+			},
 			screens: {
 				'content-xs': '20rem',
 				'content-sm': '24rem',

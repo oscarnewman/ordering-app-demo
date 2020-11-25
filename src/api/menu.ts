@@ -5,6 +5,11 @@ import { marbleSchema } from './schema'
 let menu = null
 const menuById: any = {}
 
+export async function getMenu(menuId: string) {
+	const { data } = await marbleClient.get(`/menus/${menuId}`)
+	return data
+}
+
 export async function loadNormalizedMenu(menuId: string) {
 	const result = await marbleClient.get(`/menus/${menuId}/formatted`)
 	menu = result.data

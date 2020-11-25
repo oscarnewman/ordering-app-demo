@@ -19,6 +19,10 @@ module.exports = {
 	},
 	plugins: ['autofix', 'react', '@typescript-eslint'],
 	rules: {
+		// note you must disable the base rule as it can report incorrect errors
+		'no-use-before-define': 'off',
+		'@typescript-eslint/no-use-before-define': ['error'],
+		'react/jsx-no-undef': ['error', { allowGlobals: true }],
 		'no-unused-vars': 0,
 		'@typescript-eslint/no-unused-vars-experimental': 0,
 		'space-before-function-paren': 0,
@@ -27,6 +31,7 @@ module.exports = {
 		'react/jsx-fragments': 0,
 		'react/react-in-jsx-scope': 0,
 		'react/no-unused-prop-types': 0,
+
 		'react/self-closing-comp': [
 			'error',
 			{

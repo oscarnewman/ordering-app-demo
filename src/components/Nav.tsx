@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { ArrowLeftIcon, ShoppingBagIcon } from './ui/icons'
+import { ArrowLeftIcon, ShoppingBagIcon } from './ui/icons/Icon'
+import Logo from './ui/Logo'
 
 interface Props {
 	back?: boolean
@@ -16,7 +16,9 @@ const Nav = ({ menuId, back }: Props) => {
 					</button>
 				</Link>
 			) : (
-				<p className="font-bold">Sharky&apos;s Westlake</p>
+				<div className="w-44">
+					<Logo />
+				</div>
 			)}
 			<ShoppingBagIcon className="w-6" />
 		</nav>

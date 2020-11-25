@@ -1,6 +1,6 @@
+import { useTheme } from '@/context/theme'
 import { Category } from '@/types'
 import classNames from 'classnames'
-import { useState } from 'react'
 
 interface Props {
 	category: Category
@@ -19,13 +19,18 @@ export default function CategoryTab({ category, onClick, active }: Props) {
 		onClick()
 	}
 
+	const theme = useTheme()
+
 	return (
 		<a
 			onClick={handleClick}
 			href={`#${category.name}`}
 			className={classNames(
 				'cursor-pointer whitespace-no-wrap px-2 py-2 rounded text-sm flex-shrink-0',
-				{ 'text-gray-600': !active, 'text-white bg-gray-900': active }
+				{
+					'text-gray-600': !active,
+					'active bg-theme-secondary text-white': active,
+				}
 			)}
 		>
 			{category.name}

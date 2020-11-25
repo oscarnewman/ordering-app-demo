@@ -46,3 +46,73 @@ export interface Category {
 	useSubcategories: boolean
 	image: string
 }
+
+export interface Theme {
+	assets: {
+		logo: string
+		welcomeBackground: string
+	}
+	theme: {
+		primaryColor: string
+		secondaryColor: string
+		tertiaryColor: string
+		borderStyle: 'rounded' | 'square'
+	}
+	general: {
+		name: string
+		timeout: number
+		localTimezone: string
+		displayDineInTakeOut: boolean
+		dineInMessage: string
+		takeoutMessage: string
+		displayTableNumber: boolean
+		displayCommentsButton: boolean
+		isFundraiserActive: boolean
+		loyaltyEnabled: boolean
+		welcomeLoginEnabled: boolean
+		openingMessage: string
+		disclaimer: string
+		customerAuthTypes: string[]
+	}
+	payments: {
+		card: {
+			enabled: boolean
+			tipping: {
+				enabled: boolean
+				options: {
+					low: number
+					mid: number
+					high: number
+					preselected?: number
+					type: 'percent' | 'fixed'
+				}
+			}
+		}
+		cash: {
+			enabled: boolean
+			tipping: {
+				enabled: boolean
+				options: {
+					low: number
+					mid: number
+					high: number
+					preselected?: number
+					type: 'percent' | 'fixed'
+				}
+			}
+		}
+		giftCard: {
+			enabled: boolean
+		}
+	}
+	loyalty: {
+		modeType: string
+		pointsUnlockCurrency: {
+			conversionThreshold: number
+			currencyEarned: number
+			spend: number
+			earn: number
+			currencyName: string
+		}
+	}
+}

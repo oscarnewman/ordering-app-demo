@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ArrowLeftIcon, ShoppingBagIcon } from './ui/icons/Icon'
+import { ArrowLeftIcon, ShoppingBagIcon } from './ui/icons'
+import Icon from './ui/icons/Icon'
 import Logo from './ui/Logo'
 
 interface Props {
@@ -12,7 +13,7 @@ const Nav = ({ menuId, back }: Props) => {
 			{back ? (
 				<Link href={`/${menuId}` || '/'}>
 					<button className="flex items-center font-medium">
-						<ArrowLeftIcon className="w-6 mr-2" /> Menu
+						<Icon icon="arrow-left" className="w-6 mr-2" /> Menu
 					</button>
 				</Link>
 			) : (
@@ -20,7 +21,7 @@ const Nav = ({ menuId, back }: Props) => {
 					<Logo />
 				</div>
 			)}
-			<ShoppingBagIcon className="w-6" />
+			<Icon icon="shopping-bag" className="w-6" />
 		</nav>
 	)
 }

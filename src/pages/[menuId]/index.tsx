@@ -1,15 +1,15 @@
 import marbleClient from '@/api/client'
+import { getLocationSettings } from '@/api/location'
+import { getHomepageData, loadNormalizedMenu } from '@/api/menu'
 import CategoryTabs from '@/components/CategoryTabs'
 import Nav from '@/components/Nav'
+import Stack from '@/components/ui/Stack'
+import { ThemeProvider } from '@/context/theme'
 import BaseLayout from '@/layout/BaseLayout'
+import Padding from '@/layout/Padding'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
-import Stack from '@/components/ui/Stack'
-import { getHomepageData, loadNormalizedMenu } from '@/api/menu'
-import Padding from '@/layout/Padding'
 import { MenuItem } from '../../components/MenuItem'
-import { getLocationSettings } from '@/api/location'
-import { ThemeProvider } from '@/context/theme'
 
 export default function Index({ categories, settings }) {
 	const router = useRouter()
@@ -19,7 +19,7 @@ export default function Index({ categories, settings }) {
 	}
 
 	return (
-		<ThemeProvider value={settings}>
+		<ThemeProvider theme={settings}>
 			<BaseLayout noPadding>
 				<div
 					className="sticky top-0 w-full max-w-lg bg-white z-10 border-b"

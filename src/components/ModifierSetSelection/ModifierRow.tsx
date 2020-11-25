@@ -1,7 +1,7 @@
 import { Modifier } from '@/types'
 import { formatMinorAmmount } from '@/util/currency'
 import classNames from 'classnames'
-import { PlusIcon } from '../ui/icons/Icon'
+import { PlusIcon } from '../ui/icons'
 
 interface Props {
 	modifier: Modifier

@@ -4,7 +4,7 @@ import {
 	ArrowRightIcon,
 	PlusCircleIcon,
 	ShoppingBagIcon,
-} from './icons'
+} from '.'
 
 export const icons = {
 	'arrow-left': ArrowLeftIcon,

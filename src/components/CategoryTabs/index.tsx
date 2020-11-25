@@ -9,6 +9,8 @@ interface Props {
 export default function CategoryTabs({ categories }: Props) {
 	const [activeTab, setActiveTab] = useState(0)
 
+	const ref = useRef(null)
+
 	useEffect(() => {
 		const elementToScrollTo = ref.current.children[0].children[activeTab]
 		const offsetLeft = elementToScrollTo.offsetLeft
@@ -20,8 +22,6 @@ export default function CategoryTabs({ categories }: Props) {
 			behavior: 'smooth',
 		})
 	}, [activeTab])
-
-	const ref = useRef(null)
 
 	return (
 		<div className="overflow-x-scroll pb-4" id="tabs" ref={ref}>

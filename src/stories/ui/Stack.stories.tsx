@@ -19,10 +19,10 @@ const Template = args => (
 )
 
 export const Vertical = Template.bind({})
-Vertical.args = { space: '4' }
+Vertical.args = { space: 4 }
 
 export const Horizontal = Template.bind({})
-Horizontal.args = { space: '4', row: true }
+Horizontal.args = { space: 4, row: true }
 
 export const Divided = Template.bind({})
 Divided.args = { space: 0, divider: true }

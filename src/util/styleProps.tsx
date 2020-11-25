@@ -1,4 +1,9 @@
+import { CSSProperties } from 'react'
+
 export interface StyleProps {
+	/** Class names to append to the DOM element */
 	className?: string
-	style?: object
+
+	/** Javascript CSS Properties */
+	style?: CSSProperties
 }

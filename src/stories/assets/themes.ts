@@ -5,8 +5,8 @@ export const MarbleTheme = {
 			'https://marble-tech-images.s3.amazonaws.com/WelcomeBackground:2gNCxCQ6UJ.png?v=480819',
 	},
 	theme: {
-		primaryColor: '#2E2E35',
-		secondaryColor: '#87EEBF',
+		primaryColor: '#10B981',
+		secondaryColor: '#2E2E35',
 		tertiaryColor: '#F5F6F8',
 		borderStyle: 'rounded',
 	},

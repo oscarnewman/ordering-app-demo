@@ -14,7 +14,7 @@ function Tab({ name, onClick, active = false }: Props) {
 				'cursor-pointer whitespace-no-wrap px-2 py-2 rounded text-sm flex-shrink-0',
 				{
 					'text-gray-600': !active,
-					'active bg-theme-secondary text-white': active,
+					'active border-b-2 border-theme-secondary text-white': active,
 				}
 			)}
 		>

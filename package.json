@@ -34,10 +34,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.7",
     "@next/plugin-storybook": "^10.0.3",
-    "@storybook/addon-actions": "^6.1.6",
-    "@storybook/addon-essentials": "^6.1.6",
-    "@storybook/addon-links": "^6.1.6",
-    "@storybook/react": "^6.1.6",
+    "@storybook/addon-actions": "^6.1.9",
+    "@storybook/addon-essentials": "^6.1.9",
+    "@storybook/addon-links": "^6.1.9",
+    "@storybook/react": "^6.1.9",
     "@tailwindcss/forms": "^0.2.1",
     "@tailwindcss/typography": "^0.2.0",
     "@types/classnames": "^2.2.11",
@@ -67,6 +67,7 @@
     "prettier": "^2.1.2",
     "react-docgen-typescript": "^1.20.5",
     "storybook-addon-themes": "^6.0.0",
+    "styled-jsx-plugin-postcss": "^4.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.0.5"
   }

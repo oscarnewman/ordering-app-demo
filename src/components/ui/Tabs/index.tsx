@@ -27,7 +27,7 @@ function Tabs({ tabs, className, style }: Props) {
 
 	return (
 		<div
-			className={cx('tabs overflow-x-scroll pb-4', className)}
+			className={cx('tabs overflow-x-scroll pb-4 ', className)}
 			id="tabs"
 			ref={ref}
 		>

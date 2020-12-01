@@ -30,6 +30,9 @@ module.exports = {
 				'content-lg': '32rem',
 			},
 			spacing: {
+				'2px': '2px',
+				'3px': '3px',
+				'4px': '4px',
 				'1/2': '50%',
 				'2/3': '66.666%',
 				'3/4': '75%',

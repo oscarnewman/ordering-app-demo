@@ -6,13 +6,13 @@
 
 **Production**
 
-- [Spotlight](https://spotlight-one.vercel.app/)
-- [Storybook](https://spotlight-ui-kit.vercel.app/)
+- <a href="https://spotlight-one.vercel.app/" target="_blank">Spotlight</a>
+- <a href="https://spotlight-ui-kit.vercel.app/" target="_blank">Storybook</a>
 
 **Staging**
 
-- [Spotlight](https://spotlight-git-develop.marbletech.vercel.app/)
-- [Storybook](https://spotlight-ui-kit-git-develop.marbletech.vercel.app/)
+- <a href="https://spotlight-git-develop.marbletech.vercel.app/" target="_blank">Spotlight</a>
+- <a href="https://spotlight-ui-kit-git-develop.marbletech.vercel.app/" target="_blank">Storybook</a>
 
 ## Contributing
 

@@ -1,30 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotlight
 
-## Getting Started
+> Marble's mobile scan-to-order app
 
-First, run the development server:
+## Live Links
+
+**Production**
+
+- [Spotlight](https://spotlight-one.vercel.app/)
+- [Storybook](https://spotlight-ui-kit.vercel.app/)
+
+**Staging**
+
+- [Spotlight](https://spotlight-git-develop.marbletech.vercel.app/)
+- [Storybook](https://spotlight-ui-kit-git-develop.marbletech.vercel.app/)
+
+## Contributing
+
+> Read the [Contribution Guide](CONTRIBUTING.md) to get started
+
+## Requirements
+
+- node (^10.0.0)
+- yarn (^1.22.0)
+
+## Setup
+
+Install dependencies first.
 
 ```bash
-npm run dev
-# or
-yarn dev
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env.local` file copied from `.env.example`. Update values as needed. Get an access key from someone on the team.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Running in Development
 
-## Learn More
+To run the app in development, run `yarn serve`.
 
-To learn more about Next.js, take a look at the following resources:
+To view the storybook, run `yarn storybook`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Building for production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+yarn build
+yarn build-storybook
+```
 
-## Deploy on Vercel
+## Deploying
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`main` and `develop` branches are automatically deployed via
+[Vercel](https://vercel.com/oscarnewman).

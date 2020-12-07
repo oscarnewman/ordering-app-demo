@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-undef
-
 import { cx } from '@/util/classes'
 import { StyleProps } from '@/util/styleProps'
 import { ReactNode } from 'react'

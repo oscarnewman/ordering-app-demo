@@ -6,6 +6,7 @@ type Props = HasChildren & {
 	menuId?: string
 	back?: boolean
 }
+
 function FixedTopbar({ children, ...navProps }: Props) {
 	return (
 		<div className="sticky top-0 z-10 w-full max-w-lg border-b" id="#fixed-nav">

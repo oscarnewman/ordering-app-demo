@@ -1,5 +1,3 @@
-import Logo from '@/components/ui/Logo'
-import Stack from '@/components/ui/Stack'
 import BaseLayout from '@/layout/BaseLayout'
 import { Meta } from '@storybook/react'
 

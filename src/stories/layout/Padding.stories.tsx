@@ -1,11 +1,9 @@
-import Logo from '@/components/ui/Logo'
-import Stack from '@/components/ui/Stack'
-import Padding from '@/layout/Padding'
+import LayoutPadding from '@/layout/LayoutPadding'
 import { Meta } from '@storybook/react'
 
 export default {
 	title: 'Layout/Padding',
-	component: Padding,
+	component: LayoutPadding,
 	args: {
 		disabled: false,
 	},
@@ -14,11 +12,11 @@ export default {
 const Template = args => (
 	<div className="border border-gray-400 w-full text-center">
 		Page
-		<Padding {...args}>
+		<LayoutPadding {...args}>
 			<div className="bg-gray-200 w-full h-64">
 				Padded Content (on certain viewport sizes)
 			</div>
-		</Padding>
+		</LayoutPadding>
 		<div className="bg-gray-300 w-full h-64">Not Padded Content</div>
 	</div>
 )

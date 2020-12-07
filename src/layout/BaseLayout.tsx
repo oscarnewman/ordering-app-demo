@@ -1,7 +1,7 @@
 import { useTheme } from '@/context/theme'
 import Head from 'next/head'
 import { ReactNode, useMemo } from 'react'
-import Padding from './Padding'
+import LayoutPadding from './LayoutPadding'
 
 interface Props {
 	/** The content for the page layout */
@@ -28,11 +28,11 @@ export default function BaseLayout({
 	}, [theme, title])
 
 	return (
-		<Padding disabled={noPadding} className="max-w-lg mx-auto relative">
+		<LayoutPadding disabled={noPadding} className="max-w-lg mx-auto relative">
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>
 			{children}
-		</Padding>
+		</LayoutPadding>
 	)
 }

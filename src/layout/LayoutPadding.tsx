@@ -16,7 +16,12 @@ type Props = StyleProps & {
  * Applies the application-wide responsive page padding to any children.
  * Pads content on mobile viewports, but allows it to take up its full width on larger sizes.
  */
-function Padding({ children, disabled = false, className, style }: Props) {
+function LayoutPadding({
+	children,
+	disabled = false,
+	className,
+	style,
+}: Props) {
 	return (
 		<div
 			className={cx({ 'px-4 content-lg:px-0': !disabled }, className)}
@@ -27,4 +32,4 @@ function Padding({ children, disabled = false, className, style }: Props) {
 	)
 }
 
-export default Padding
+export default LayoutPadding

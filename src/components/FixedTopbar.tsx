@@ -1,4 +1,4 @@
-import Padding from '@/layout/Padding'
+import Padding from '@/layout/LayoutPadding'
 import Nav from '@/components/Nav'
 import { HasChildren } from '@/util/children'
 

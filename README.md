@@ -35,7 +35,7 @@ Create a `.env.local` file copied from `.env.example`. Update values as needed. 
 
 ## Running in Development
 
-To run the app in development, run `yarn serve`.
+To run the app in development, run `yarn dev`.
 
 To view the storybook, run `yarn storybook`.
 

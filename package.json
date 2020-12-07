@@ -69,6 +69,7 @@
     "storybook-addon-themes": "^6.0.0",
     "styled-jsx-plugin-postcss": "^4.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "tsconfig-paths-webpack-plugin": "^3.3.0",
     "typescript": "^4.0.5"
   }
 }

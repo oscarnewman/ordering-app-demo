@@ -1,9 +1,11 @@
 import { useTheme } from '@/context/theme'
+import { cx } from '@/util/classes'
+import { StyleProps } from '@/util/styleProps'
 import Head from 'next/head'
 import { ReactNode, useMemo } from 'react'
 import LayoutPadding from './LayoutPadding'
 
-interface Props {
+type Props = StyleProps & {
 	/** The content for the page layout */
 	children: ReactNode
 
@@ -21,6 +23,8 @@ export default function BaseLayout({
 	children,
 	noPadding = false,
 	title,
+	className,
+	style,
 }: Props) {
 	const theme = useTheme()
 	const pageTitle = useMemo(() => {
@@ -28,7 +32,11 @@ export default function BaseLayout({
 	}, [theme, title])
 
 	return (
-		<LayoutPadding disabled={noPadding} className="max-w-lg mx-auto relative">
+		<LayoutPadding
+			disabled={noPadding}
+			className={cx('max-w-lg mx-auto relative', className)}
+			style={style}
+		>
 			<Head>
 				<title>{pageTitle}</title>
 			</Head>

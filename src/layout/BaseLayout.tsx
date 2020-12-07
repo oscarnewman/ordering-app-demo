@@ -24,7 +24,7 @@ export default function BaseLayout({
 }: Props) {
 	const theme = useTheme()
 	const pageTitle = useMemo(() => {
-		return title || theme.general.name
+		return title || theme?.general?.name || 'Marble Order'
 	}, [theme, title])
 
 	return (

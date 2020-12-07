@@ -1,12 +1,15 @@
 import marbleClient from '@/api/client'
 import BaseLayout from '@/layout/BaseLayout'
-import { GetStaticPropsContext } from 'next'
 import Link from 'next/link'
 
 type Props = {
-	menus: any[]
+	/** A list of menu objects, which at least have an ID and name */
+	menus: { id: string; name: string }[]
 }
 
+/**
+ * A catch-all landing page for development so preview links don't 404 (since we only have 1 menu and no QR yet).
+ */
 function Index({ menus }: Props) {
 	return (
 		<BaseLayout>

@@ -1,4 +1,4 @@
-import { useTheme } from '@/context/theme'
+import { useLocationSettings } from '@/context/locationSettings'
 import { Category } from '@/types'
 import classNames from 'classnames'
 
@@ -19,7 +19,7 @@ export default function CategoryTab({ category, onClick, active }: Props) {
 		onClick()
 	}
 
-	const theme = useTheme()
+	const theme = useLocationSettings()
 
 	return (
 		<a

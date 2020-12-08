@@ -1,4 +1,5 @@
-export const MarbleTheme = {
+import { LocationSettings } from './../../types'
+export const MarbleTheme: LocationSettings = {
 	assets: {
 		logo: 'https://marblekiosk.com/branding/logo.svg',
 		welcomeBackground:
@@ -71,7 +72,7 @@ export const MarbleTheme = {
 	},
 }
 
-export const SharkysTheme = {
+export const SharkysTheme: LocationSettings = {
 	assets: {
 		logo:
 			'https://marble-tech-images.s3.amazonaws.com/BrandLogo:2gNCxCQ6UJ.png?v=379300',

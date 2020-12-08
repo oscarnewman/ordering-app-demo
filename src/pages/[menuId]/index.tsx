@@ -4,7 +4,7 @@ import { getHomepageData, loadNormalizedMenu } from '@/api/menu'
 import CategoryTabs from '@/components/CategoryTabs'
 import Nav from '@/components/Nav'
 import Stack from '@/components/ui/Stack'
-import { ThemeProvider } from '@/context/theme'
+import { LocationSettingsProvider } from '@/context/locationSettings'
 import BaseLayout from '@/layout/BaseLayout'
 import Padding from '@/layout/LayoutPadding'
 import { GetStaticPropsContext } from 'next'
@@ -19,7 +19,7 @@ export default function Index({ categories, settings }) {
 	}
 
 	return (
-		<ThemeProvider theme={settings}>
+		<LocationSettingsProvider settings={settings}>
 			<BaseLayout noPadding>
 				<div
 					className="sticky top-0 w-full max-w-lg bg-white z-10 border-b"
@@ -55,7 +55,7 @@ export default function Index({ categories, settings }) {
 					</div>
 				</Padding>
 			</BaseLayout>
-		</ThemeProvider>
+		</LocationSettingsProvider>
 	)
 }
 

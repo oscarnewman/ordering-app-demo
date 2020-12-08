@@ -47,7 +47,7 @@ export interface Category {
 	image: string
 }
 
-export interface Theme {
+export interface LocationSettings {
 	assets: {
 		logo: string
 		welcomeBackground: string

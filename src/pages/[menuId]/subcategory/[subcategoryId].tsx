@@ -9,7 +9,7 @@ import FixedTopbar from '@/components/FixedTopbar'
 import ModifierSetSelection from '@/components/ModifierSetSelection'
 import { ArrowRightIcon } from '@/components/ui/icons'
 import Stack from '@/components/ui/Stack'
-import { ThemeProvider } from '@/context/theme'
+import { LocationSettingsProvider } from '@/context/locationSettings'
 import BaseLayout from '@/layout/BaseLayout'
 import Padding from '@/layout/LayoutPadding'
 import { formatMinorAmmount } from '@/util/currency'
@@ -73,7 +73,7 @@ export default function Subcategory({ subcategory, settings }) {
 	}
 
 	return (
-		<ThemeProvider theme={settings}>
+		<LocationSettingsProvider settings={settings}>
 			<BaseLayout noPadding>
 				<FixedTopbar back menuId={router.query.menuId as string} />
 				{router.isFallback ? (
@@ -136,7 +136,7 @@ export default function Subcategory({ subcategory, settings }) {
 					</Stack>
 				)}
 			</BaseLayout>
-		</ThemeProvider>
+		</LocationSettingsProvider>
 	)
 }
 

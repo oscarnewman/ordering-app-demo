@@ -3,7 +3,7 @@ import Nav from '@/components/Nav'
 import { ReactNode } from 'react'
 
 type Props = {
-	children: ReactNode
+	children?: ReactNode
 	menuId?: string
 	back?: boolean
 }

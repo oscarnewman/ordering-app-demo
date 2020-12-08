@@ -1,9 +1,13 @@
-import { LocationSettingsProvider } from '@/context/locationSettings'
+import {
+	LocationSettingsProvider,
+	useLocationSettings,
+} from '@/context/locationSettings'
+import { MarbleTheme } from '@/stories/assets/themes'
 import { LocationSettings } from '@/types'
 import { cx } from '@/util/classes'
 import { StyleProps } from '@/util/styleProps'
 import Head from 'next/head'
-import { ReactNode, useMemo } from 'react'
+import { Fragment, ReactNode, useMemo } from 'react'
 import LayoutPadding from './LayoutPadding'
 
 type Props = StyleProps & {
@@ -17,7 +21,7 @@ type Props = StyleProps & {
 	title?: string
 
 	/** A location settings object to be placed into context */
-	locationSettings: LocationSettings
+	locationSettings?: LocationSettings
 }
 
 /**
@@ -35,8 +39,10 @@ export default function BaseLayout({
 		return title || locationSettings?.general?.name || 'Marble Order'
 	}, [locationSettings, title])
 
+	const Wrapper = locationSettings ? LocationSettingsProvider : Fragment
+
 	return (
-		<LocationSettingsProvider settings={locationSettings}>
+		<Wrapper settings={locationSettings}>
 			<LayoutPadding
 				disabled={noPadding}
 				className={cx('max-w-lg mx-auto relative', className)}
@@ -47,6 +53,6 @@ export default function BaseLayout({
 				</Head>
 				{children}
 			</LayoutPadding>
-		</LocationSettingsProvider>
+		</Wrapper>
 	)
 }

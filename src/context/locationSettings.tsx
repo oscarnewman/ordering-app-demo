@@ -1,11 +1,12 @@
 import { LocationSettings } from '@/types'
+import { MarbleTheme } from '@/assets/defaultThemeSettings'
 import { createContext, ReactNode, useContext } from 'react'
 
 /**
  * A context containing location-specific settings such as colors, images, and strings
  */
-const locationSettingsContext = createContext<LocationSettings>(null)
-export default locationSettingsContext
+const LocationSettingsContext = createContext<LocationSettings>(null)
+export default LocationSettingsContext
 
 type ThemeProvderProps = {
 	/** A location settings object returned from the marble API */
@@ -20,11 +21,11 @@ type ThemeProvderProps = {
  * also injects relevant css variables into global scope
  */
 export function LocationSettingsProvider({
-	settings,
+	settings = MarbleTheme,
 	children,
 }: ThemeProvderProps) {
 	return (
-		<locationSettingsContext.Provider value={settings}>
+		<LocationSettingsContext.Provider value={settings}>
 			{children}
 			<style jsx global>{`
 				/* This is where we inject our global css variables */
@@ -34,8 +35,8 @@ export function LocationSettingsProvider({
 					--theme-tertiary: ${settings.theme.tertiaryColor};
 				}
 			`}</style>
-		</locationSettingsContext.Provider>
+		</LocationSettingsContext.Provider>
 	)
 }
 
-export const useLocationSettings = () => useContext(locationSettingsContext)
+export const useLocationSettings = () => useContext(LocationSettingsContext)

@@ -73,6 +73,7 @@ export interface LocationSettings {
 		openingMessage: string
 		disclaimer: string
 		customerAuthTypes: string[]
+		cardReader: string
 	}
 	payments: {
 		card: {

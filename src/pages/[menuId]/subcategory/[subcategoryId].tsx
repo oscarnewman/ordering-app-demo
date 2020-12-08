@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import marbleClient from '@/api/client'
 import {
 	getAllSubcategoryIds,
@@ -5,13 +6,13 @@ import {
 	loadNormalizedMenu,
 } from '@/api/menu'
 import FixedTopbar from '@/components/FixedTopbar'
+import BaseLayout from '@/components/layout/BaseLayout'
+import Padding from '@/components/layout/LayoutPadding'
 import ModifierSetSelection from '@/components/ModifierSetSelection'
 import { ArrowRightIcon } from '@/components/ui/icons'
 import Stack from '@/components/ui/Stack'
-import BaseLayout from '@/layout/BaseLayout'
-import Padding from '@/layout/LayoutPadding'
-import { formatMinorAmmount } from '@/util/currency'
-import { generateBaseStaticProps } from '@/util/ssg'
+import { formatMinorAmmount } from '@/utilities/currency'
+import { generateBaseStaticProps } from '@/utilities/ssg'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
@@ -29,10 +30,10 @@ export default function Subcategory({ subcategory, settings }) {
 
 	const item = useMemo(
 		() => (itemId ? subcategory.items.find(({ id }) => id === itemId) : null),
-		[itemId]
+		[itemId, subcategory.items]
 	)
 
-	const modifierSets = useMemo(() => item.modifierSets, [item, subcategory])
+	const modifierSets = useMemo(() => item.modifierSets, [item])
 
 	const modifiers = useMemo(
 		() =>
@@ -62,7 +63,7 @@ export default function Subcategory({ subcategory, settings }) {
 		)
 
 		return itemPrice + modifierPrice
-	}, [item, selectedModifiers])
+	}, [item, modifiers, selectedModifiers])
 
 	const handleModifierSelection = (modiferSetId: string) => (
 		modifierIds: string[]

@@ -1,7 +1,6 @@
+import { LocationSettingsProvider } from '@/contexts/locationSettings'
+import { MarbleTheme, SharkysTheme } from '@/stories/assets/themes'
 import { withThemes } from 'storybook-addon-themes/react'
-
-import { LocationSettingsProvider } from '@/context/locationSettings'
-import { SharkysTheme, MarbleTheme } from '@/stories/assets/themes'
 import Layout from './Layout'
 
 function ThemeDecorator({children, themeName}) {

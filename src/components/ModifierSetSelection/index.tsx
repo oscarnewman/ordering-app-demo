@@ -1,4 +1,4 @@
-import { ModifierSet, Modifier } from '@/types'
+import { ModifierSet, Modifier } from '@/types/types'
 import { useCallback, useEffect, useState } from 'react'
 import Stack from '../ui/Stack'
 import ModifierRow from './ModifierRow'

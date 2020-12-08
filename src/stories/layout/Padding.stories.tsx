@@ -1,4 +1,4 @@
-import LayoutPadding from '@/layout/LayoutPadding'
+import LayoutPadding from '@/components/layout/LayoutPadding'
 import { Meta } from '@storybook/react'
 
 export default {

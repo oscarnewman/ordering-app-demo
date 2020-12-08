@@ -1,4 +1,4 @@
-import BaseLayout from '@/layout/BaseLayout'
+import BaseLayout from '@/components/layout/BaseLayout'
 import { Meta } from '@storybook/react'
 
 export default {

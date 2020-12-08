@@ -1,5 +1,5 @@
-import { cx } from '@/util/classes'
-import { StyleProps } from '@/util/styleProps'
+import { cx } from '@/utilities/classes'
+import { StyleProps } from '@/utilities/styleProps'
 import { ReactNode } from 'react'
 
 type Props = StyleProps & {

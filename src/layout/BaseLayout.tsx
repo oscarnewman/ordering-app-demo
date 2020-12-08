@@ -1,8 +1,4 @@
-import {
-	LocationSettingsProvider,
-	useLocationSettings,
-} from '@/context/locationSettings'
-import { MarbleTheme } from '@/stories/assets/themes'
+import { LocationSettingsProvider } from '@/context/locationSettings'
 import { LocationSettings } from '@/types'
 import { cx } from '@/util/classes'
 import { StyleProps } from '@/util/styleProps'

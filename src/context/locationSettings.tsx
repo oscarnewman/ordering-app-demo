@@ -1,5 +1,4 @@
 import { LocationSettings } from '@/types'
-import { MarbleTheme } from '@/assets/defaultThemeSettings'
 import { createContext, ReactNode, useContext } from 'react'
 
 /**
@@ -21,7 +20,7 @@ type ThemeProvderProps = {
  * also injects relevant css variables into global scope
  */
 export function LocationSettingsProvider({
-	settings = MarbleTheme,
+	settings,
 	children,
 }: ThemeProvderProps) {
 	return (

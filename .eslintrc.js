@@ -19,7 +19,7 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
-	plugins: ['autofix', 'react', '@typescript-eslint'],
+	plugins: ['react', '@typescript-eslint', 'react-hooks'],
 	rules: {
 		// note you must disable the base rule as it can report incorrect errors
 		'no-use-before-define': 'off',
@@ -33,7 +33,8 @@ module.exports = {
 		'react/jsx-fragments': 0,
 		'react/react-in-jsx-scope': 0,
 		'react/no-unused-prop-types': 0,
-
+		'react-hooks/rules-of-hooks': 'error',
+		'react-hooks/exhaustive-deps': 'warn',
 		'react/self-closing-comp': [
 			'error',
 			{

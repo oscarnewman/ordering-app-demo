@@ -1,4 +1,4 @@
-import { Category } from '@/types'
+import { Category } from '@/types/types'
 import { useEffect, useRef, useState } from 'react'
 import CategoryTab from './CategoryTab'
 import Stack from '../ui/Stack'

@@ -1,5 +1,5 @@
 import { LocationSettingsProvider } from '@/contexts/locationSettings'
-import { LocationSettings } from '@/types'
+import { LocationSettings } from '@/types/LocationSettings'
 import { cx } from '@/utilities/classes'
 import { StyleProps } from '@/utilities/styleProps'
 import Head from 'next/head'

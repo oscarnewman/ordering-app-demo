@@ -1,4 +1,4 @@
-import { LocationSettings } from '@/types'
+import { LocationSettings } from '@/types/LocationSettings'
 import { createContext, ReactNode, useContext } from 'react'
 
 /**

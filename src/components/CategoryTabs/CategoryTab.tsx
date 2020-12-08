@@ -1,5 +1,5 @@
 import { useLocationSettings } from '@/contexts/locationSettings'
-import { Category } from '@/types'
+import { Category } from '@/types/types'
 import classNames from 'classnames'
 
 interface Props {

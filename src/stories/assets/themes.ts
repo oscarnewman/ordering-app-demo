@@ -1,4 +1,5 @@
-import { LocationSettings } from './../../types'
+import { LocationSettings } from '@/types/LocationSettings'
+
 export const MarbleTheme: LocationSettings = {
 	assets: {
 		logo: 'https://marblekiosk.com/branding/logo.svg',

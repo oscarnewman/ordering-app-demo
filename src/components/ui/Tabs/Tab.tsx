@@ -19,19 +19,19 @@ function Tab(
 			onClick={onClick}
 			className={cx(
 				'cursor-pointer whitespace-no-wrap px-4 py-2 text-sm flex-shrink-0 focus:outline-none',
-				'border-b-4 font-medium',
+				'font-medium border-b tab',
 				{
 					'text-gray-400': !active,
 					'text-theme-primary': active,
 					'border-transparent': !showActiveState,
-					'show-border': showActiveState,
+					'border-theme-primary': showActiveState,
 				}
 			)}
 		>
 			{name}
 			<style jsx>{`
-				.show-border {
-					border-width-bottom: var(--border-width);
+				.tab {
+					border-bottom-width: var(--border-width);
 				}
 			`}</style>
 		</button>

@@ -1,8 +1,9 @@
 import Padding from '@/components/layout/LayoutPadding'
 import Nav from '@/components/Nav'
-import { HasChildren } from '@/utilities/children'
+import { ReactNode } from 'react'
 
-type Props = HasChildren & {
+type Props = {
+	children: ReactNode
 	menuId?: string
 	back?: boolean
 }

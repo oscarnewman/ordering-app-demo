@@ -38,4 +38,10 @@ export function LocationSettingsProvider({
 	)
 }
 
-export const useLocationSettings = () => useContext(LocationSettingsContext)
+export const useLocationSettings = () => {
+	const context = useContext(LocationSettingsContext)
+	if (!context) {
+		throw new Error('A ThemeProvider must be present in the tree')
+	}
+	return context
+}

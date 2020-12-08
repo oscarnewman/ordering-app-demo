@@ -1,11 +1,9 @@
-import '@/styles/tailwind.css'
 import '@/styles/nprogress.css'
-
+import '@/styles/tailwind.css'
 import { useRouter } from 'next/router'
 import nProgress from 'nprogress'
 import { useEffect } from 'react'
 import smoothscroll from 'smoothscroll-polyfill'
-import { GetStaticPropsContext } from 'next'
 
 function MyApp({ Component, pageProps }) {
 	const router = useRouter()

@@ -1,17 +1,16 @@
-import marbleClient from '@/api/client'
-import { getItemData, loadNormalizedMenu } from '@/api/menu'
+import { getItemData } from '@/api/menu'
 import Nav from '@/components/Nav'
-import BaseLayout from '@/layout/BaseLayout'
-import { GetStaticPropsContext } from 'next'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
 import Stack from '@/components/ui/Stack'
+import BaseLayout from '@/layout/BaseLayout'
+import { generateBaseStaticProps } from '@/util/ssg'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-export default function Item({ item }) {
+export default function Item({ item, settings }) {
 	const router = useRouter()
 
 	return (
-		<BaseLayout noPadding>
+		<BaseLayout noPadding locationSettings={settings}>
 			<div className="px-4 content-lg:px-0">
 				<Nav back menuId={router.query.menuId as string} />
 			</div>
@@ -42,29 +41,15 @@ export default function Item({ item }) {
 	)
 }
 
-export async function getStaticProps(context: GetStaticPropsContext) {
-	const { menuId, itemId } = context.params
-
-	await loadNormalizedMenu(menuId as string)
-	const item = getItemData(itemId)
+export const getStaticProps = generateBaseStaticProps(context => {
+	const { itemId } = context.params
 
 	return {
-		props: {
-			item,
-		},
-		revalidate: 60,
+		item: getItemData(itemId),
 	}
-}
+})
 
 export async function getStaticPaths() {
-	// const menus = await marbleClient.get('/menus')
-	// const menuId = menus.data.results[0].id
-	// await loadNormalizedMenu(menuId)
-	// const subcategories = getAllSubcategoryIds()
-	// const paths = subcategories.map(subcategoryId => ({
-	// 	params: { menuId, subcategoryId },
-	// }))
-
 	return {
 		paths: [],
 		fallback: true,

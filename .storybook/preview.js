@@ -1,13 +1,13 @@
 import { withThemes } from 'storybook-addon-themes/react'
 
-import { ThemeProvider } from '@/context/theme'
+import { LocationSettingsProvider } from '@/context/locationSettings'
 import { SharkysTheme, MarbleTheme } from '@/stories/assets/themes'
 import Layout from './Layout'
 
 function ThemeDecorator({children, themeName}) {
 	let theme = {'Sharkys': SharkysTheme}[themeName]
 	if (!theme) theme = MarbleTheme
-	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+	return <LocationSettingsProvider settings={theme}>{children}</LocationSettingsProvider>
 }
 
 export const parameters = {

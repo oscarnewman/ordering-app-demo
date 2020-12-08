@@ -47,7 +47,7 @@ export interface Category {
 	image: string
 }
 
-export interface Theme {
+export interface LocationSettings {
 	assets: {
 		logo: string
 		welcomeBackground: string
@@ -73,6 +73,7 @@ export interface Theme {
 		openingMessage: string
 		disclaimer: string
 		customerAuthTypes: string[]
+		cardReader: string
 	}
 	payments: {
 		card: {

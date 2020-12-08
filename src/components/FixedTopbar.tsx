@@ -1,6 +1,6 @@
-import Padding from '@/layout/LayoutPadding'
+import Padding from '@/components/layout/LayoutPadding'
 import Nav from '@/components/Nav'
-import { HasChildren } from '@/util/children'
+import { HasChildren } from '@/utilities/children'
 
 type Props = HasChildren & {
 	menuId?: string

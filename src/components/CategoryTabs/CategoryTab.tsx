@@ -1,4 +1,4 @@
-import { useLocationSettings } from '@/context/locationSettings'
+import { useLocationSettings } from '@/contexts/locationSettings'
 import { Category } from '@/types'
 import classNames from 'classnames'
 

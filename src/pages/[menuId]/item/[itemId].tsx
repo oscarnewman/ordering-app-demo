@@ -1,8 +1,8 @@
 import { getItemData } from '@/api/menu'
+import BaseLayout from '@/components/layout/BaseLayout'
 import Nav from '@/components/Nav'
 import Stack from '@/components/ui/Stack'
-import BaseLayout from '@/layout/BaseLayout'
-import { generateBaseStaticProps } from '@/util/ssg'
+import { generateBaseStaticProps } from '@/utilities/ssg'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 

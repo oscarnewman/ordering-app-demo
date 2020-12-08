@@ -1,4 +1,4 @@
-import { StyleProps } from '@/util/styleProps'
+import { StyleProps } from '@/utilities/styleProps'
 import {
 	ArrowLeftIcon,
 	ArrowRightIcon,

@@ -1,7 +1,7 @@
 import Tab from '@/components/ui/Tabs/Tab'
-import { cx } from '@/util/classes'
-import { StyleProps } from '@/util/styleProps'
-import { createRef, MutableRefObject, RefObject, useRef, useState } from 'react'
+import { cx } from '@/utilities/classes'
+import { StyleProps } from '@/utilities/styleProps'
+import { createRef, RefObject, useRef, useState } from 'react'
 import Stack from '../Stack'
 import Underline from './Underline'
 

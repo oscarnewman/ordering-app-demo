@@ -1,5 +1,5 @@
-import { useLocationSettings } from '@/context/locationSettings'
-import { StyleProps } from '@/util/styleProps'
+import { useLocationSettings } from '@/contexts/locationSettings'
+import { StyleProps } from '@/utilities/styleProps'
 
 type Props = StyleProps
 

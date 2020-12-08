@@ -1,5 +1,5 @@
 import { Modifier } from '@/types'
-import { formatMinorAmmount } from '@/util/currency'
+import { formatMinorAmmount } from '@/utilities/currency'
 import classNames from 'classnames'
 import { PlusIcon } from '../ui/icons'
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import marbleClient from '@/api/client'
 import {
 	getAllSubcategoryIds,
@@ -18,6 +19,8 @@ import { useMemo, useState } from 'react'
 
 export default function Subcategory({ subcategory, settings }) {
 	const router = useRouter()
+
+	if (!subcategory) return <div>Not here...</div>
 
 	const hasItems = subcategory.items && subcategory.items.length > 0
 

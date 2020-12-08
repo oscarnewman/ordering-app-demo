@@ -1,4 +1,5 @@
-import { useTheme } from '@/context/theme'
+import { LocationSettingsProvider } from '@/context/locationSettings'
+import { LocationSettings } from '@/types'
 import { cx } from '@/util/classes'
 import { StyleProps } from '@/util/styleProps'
 import Head from 'next/head'
@@ -14,6 +15,9 @@ type Props = StyleProps & {
 
 	/** A custom title for the page */
 	title?: string
+
+	/** A location settings object to be placed into context */
+	locationSettings: LocationSettings
 }
 
 /**
@@ -23,24 +27,26 @@ export default function BaseLayout({
 	children,
 	noPadding = false,
 	title,
+	locationSettings,
 	className,
 	style,
 }: Props) {
-	const theme = useTheme()
 	const pageTitle = useMemo(() => {
-		return title || theme?.general?.name || 'Marble Order'
-	}, [theme, title])
+		return title || locationSettings?.general?.name || 'Marble Order'
+	}, [locationSettings, title])
 
 	return (
-		<LayoutPadding
-			disabled={noPadding}
-			className={cx('max-w-lg mx-auto relative', className)}
-			style={style}
-		>
-			<Head>
-				<title>{pageTitle}</title>
-			</Head>
-			{children}
-		</LayoutPadding>
+		<LocationSettingsProvider settings={locationSettings}>
+			<LayoutPadding
+				disabled={noPadding}
+				className={cx('max-w-lg mx-auto relative', className)}
+				style={style}
+			>
+				<Head>
+					<title>{pageTitle}</title>
+				</Head>
+				{children}
+			</LayoutPadding>
+		</LocationSettingsProvider>
 	)
 }

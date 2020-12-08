@@ -1,6 +1,7 @@
-# Spotlight
 
-![Spotlight Logo](public/Spotlight.png)
+<p align="center">
+	<img alt="Spotlight Logo" src="public/Spotlight.png" width="600">
+</p>
 
 > Marble's mobile scan-to-order app
 

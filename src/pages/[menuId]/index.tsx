@@ -1,3 +1,4 @@
+import { authenticateMenuRetrieval } from '@/api/auth'
 import marbleClient from '@/api/client'
 import { getLocationSettings } from '@/api/location'
 import { getHomepageData, loadNormalizedMenu } from '@/api/menu'

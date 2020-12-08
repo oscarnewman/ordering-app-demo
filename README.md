@@ -1,5 +1,7 @@
 # Spotlight
 
+![Spotlight Logo](public/Spotlight.png)
+
 > Marble's mobile scan-to-order app
 
 ## Live Links

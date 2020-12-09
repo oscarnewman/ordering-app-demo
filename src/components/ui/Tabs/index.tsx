@@ -1,12 +1,12 @@
 import Tab from '@/components/ui/Tabs/Tab'
-import { useScrollToRef } from '@/hooks/useScrollToRef'
+import { useScrollToElement } from '@/hooks/useScrollToElement'
 import { cx } from '@/utilities/classes'
 import { StyleProps } from '@/utilities/styleProps'
 import { createRef, RefObject, useMemo, useRef, useState } from 'react'
-import Stack from '../Stack'
-import TargetableScrollingContent from './TargetableScrollingContent'
-import Underline from './Underline'
 import css from 'styled-jsx/css'
+import Stack from '../Stack'
+import TargetableScrollingContent from '../TargetableScrollingContent'
+import Underline from './Underline'
 
 // Use css.resolve to apply these styles to TargetableScrollingContent
 // even though it's out of scope of Styled JSX.
@@ -17,8 +17,13 @@ const { className: tabsClassName, styles } = css.resolve`
 `
 
 interface TabItem {
+	/** The displayed title of the item */
 	title: string
+
+	/** The unique key of the item */
 	value: string
+
+	/** Optionally, the href of an ID in the form `#id` to scroll to on click */
 	href?: string
 }
 
@@ -26,13 +31,23 @@ type Props = StyleProps & {
 	/** A list of tabs to display */
 	tabs: TabItem[]
 
+	/**
+	 * Ref to the containing element of the tab bar, to offset its height if
+	 * the tab bar is sticky
+	 */
 	containerRef?: RefObject<HTMLElement>
 
+	/** Ref to the scrollable container for the tab bar, if necessary */
 	scrollableRef?: RefObject<HTMLElement>
 
+	/** Whether to add additional padding for a scroll bar below the tab bar when it overflows */
 	addScrollbarPadding?: boolean
 
-	offsetTop?: number
+	/** How much to offset auto-scrolling to content by on the top */
+	offset?: number
+
+	/** Called when a tab is selected */
+	onChange?: (selected: string) => void
 }
 
 /**
@@ -49,12 +64,14 @@ function Tabs({
 	className,
 	style,
 	addScrollbarPadding = false,
-	offsetTop = 0,
+	offset = 0,
+	onChange = _ => {},
 }: Props) {
 	const ref = useRef(null)
 	const [activeTab, setActiveTab] = useState(tabs[0].value)
 	const [animating, setAnimating] = useState(false)
 
+	// Store a ref for each tab
 	const tabRefs: { [key: string]: RefObject<HTMLElement> } = useMemo(
 		() =>
 			tabs.reduce(
@@ -64,35 +81,39 @@ function Tabs({
 		[tabs]
 	)
 
+	// Horizontal overflow scrolling
 	const activeTabElement = useMemo(() => tabRefs[activeTab]?.current, [
 		activeTab,
 		tabRefs,
 	])
 
-	useScrollToRef(activeTabElement, {
+	useScrollToElement(activeTabElement, {
 		scrollContainer: ref,
 		horizontal: {
 			align: 'center',
 		},
 	})
 
+	// Vertical content scrolling
 	const scrollTarget = useMemo(() => {
 		const tab = tabs.find(({ value }) => value === activeTab)
 		if (!tab || !tab.href) return null
 		return document.getElementById(tab.href.slice(1))
 	}, [activeTab, tabs])
 
-	useScrollToRef(scrollTarget, {
+	useScrollToElement(scrollTarget, {
 		scrollContainer: scrollableRef,
 		vertical: {
 			offsetElement: containerRef,
-			offset: offsetTop,
+			offset: offset,
 			align: 'top',
 		},
 	})
 
+	// Click handler
 	const handleTabClick = (tab: TabItem) => {
 		setActiveTab(tab.value)
+		onChange(tab.value)
 		setAnimating(true)
 	}
 

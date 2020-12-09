@@ -1,7 +1,7 @@
 import Tabs from '@/components/ui/Tabs'
 import TargetableScrollingContent, {
 	BaseTargetableScrollingContent,
-} from '@/components/ui/Tabs/TargetableScrollingContent'
+} from '@/components/ui/TargetableScrollingContent'
 import { Meta } from '@storybook/react'
 import React, { useRef } from 'react'
 

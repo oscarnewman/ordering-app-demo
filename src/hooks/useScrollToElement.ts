@@ -22,14 +22,23 @@ interface UseScrollToRefOptions {
 	vertical?: DirectionalScrollOptions & { align?: 'top' | 'bottom' | 'center' }
 }
 
-export function useScrollToRef(
-	ref: HTMLElement,
+/**
+ * Will automatically scroll the window or a given container to the passed
+ * element to scroll to any time that element changes.
+ *
+ * @param elementToScrollTo The element to scroll to
+ * @param options Configuration for scroll behavior
+ */
+export function useScrollToElement(
+	elementToScrollTo: HTMLElement,
 	options: UseScrollToRefOptions = {}
 ) {
 	useEffect(() => {
-		if (!ref) return
+		// Do nothing for a null element
+		if (!elementToScrollTo) return
 
-		const elementToScrollTo = ref
+		// Figure out if we're scrolling in a container or the window.
+		// Both support `.scroll()`
 		const scrollingContainer = options.scrollContainer?.current || window
 
 		const scrollPosition = {
@@ -40,13 +49,14 @@ export function useScrollToRef(
 		// Calculate Top Scroll Offset
 		if (options.vertical) {
 			const { offset, offsetElement, align } = options.vertical
-			const offsetElementTopPadding = offsetElement?.current?.offsetHeight || 0
 
+			// Get the offset to the start of the element
 			const offsetToScrollingContainer = getOffsetTop(
 				elementToScrollTo,
 				options.scrollContainer?.current
 			)
 
+			// Calculate the proper offset for our alignment
 			const scrollContainerHeight =
 				scrollingContainer === window
 					? window.innerHeight
@@ -59,22 +69,24 @@ export function useScrollToRef(
 				bottom: scrollContainerHeight - targetElemHeight,
 			}[align]
 
+			// Calculate the final scroll position
 			scrollPosition.top =
 				offsetToScrollingContainer -
-				offsetElementTopPadding -
+				(offsetElement?.current?.offsetHeight || 0) -
 				(offset || 0) -
 				alignmentOffset
 		}
 
 		if (options.horizontal) {
 			const { offset, offsetElement, align } = options.horizontal
-			const offsetElementLeftPadding = offsetElement?.current?.offsetWidth || 0
 
+			// Get the offset to the start of the element
 			const offsetToScrollingContainer = getOffsetLeft(
 				elementToScrollTo,
 				options.scrollContainer?.current
 			)
 
+			// Calculate the proper offset for our alignment
 			const scrollContainerWidth =
 				scrollingContainer === window
 					? window.innerWidth
@@ -87,13 +99,15 @@ export function useScrollToRef(
 				right: scrollContainerWidth - targetElemWidth,
 			}[align]
 
+			// Calculate the final scroll position
 			scrollPosition.left =
 				offsetToScrollingContainer -
-				offsetElementLeftPadding -
+				(offsetElement?.current?.offsetWidth || 0) -
 				(offset || 0) -
 				alignmentOffset
 		}
 
+		// Execute the scroll
 		scrollingContainer.scroll({ ...scrollPosition, behavior: 'smooth' })
-	}, [options, ref])
+	}, [elementToScrollTo, options]) // Trigger scroll when element or options change
 }

@@ -1,5 +1,5 @@
 import Tabs from '@/components/ui/Tabs'
-import TargetableScrollingContent from '@/components/ui/Tabs/TargetableScrollingContent'
+import TargetableScrollingContent from '@/components/ui/TargetableScrollingContent'
 import { Meta } from '@storybook/react'
 import { useRef } from 'react'
 
@@ -50,7 +50,7 @@ export const ScrollsToItem = () => {
 				className="sticky top-2 bg-gray-50 p-2 shadow-lg rounded mb-4"
 				ref={ref}
 			>
-				<Tabs tabs={tabs} containerRef={ref} offsetTop={20} />
+				<Tabs tabs={tabs} containerRef={ref} offset={20} />
 			</div>
 			<main className="px-4">
 				<div id="red" className="bg-gradient-to-br from-red-50 to-red-500 h-96">

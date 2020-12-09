@@ -1,10 +1,10 @@
-import { useTheme } from '@/context/theme'
-import { StyleProps } from '@/util/styleProps'
+import { useLocationSettings } from '@/contexts/locationSettings'
+import { StyleProps } from '@/utilities/styleProps'
 
 type Props = StyleProps
 
 function Logo(props: Props) {
-	const theme = useTheme()
+	const theme = useLocationSettings()
 
 	return <img src={theme.assets.logo} alt="Logo" {...props} />
 }

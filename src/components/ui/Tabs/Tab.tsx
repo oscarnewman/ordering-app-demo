@@ -1,4 +1,4 @@
-import { cx } from '@/util/classes'
+import { cx } from '@/utilities/classes'
 import { forwardRef, RefObject } from 'react'
 
 type Props = {

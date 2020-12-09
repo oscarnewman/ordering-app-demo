@@ -1,5 +1,5 @@
-import { useTheme } from '@/context/theme'
-import { Category } from '@/types'
+import { useLocationSettings } from '@/contexts/locationSettings'
+import { Category } from '@/types/types'
 import classNames from 'classnames'
 
 interface Props {
@@ -19,7 +19,7 @@ export default function CategoryTab({ category, onClick, active }: Props) {
 		onClick()
 	}
 
-	const theme = useTheme()
+	const theme = useLocationSettings()
 
 	return (
 		<a

@@ -1,5 +1,5 @@
 import marbleClient from '@/api/client'
-import BaseLayout from '@/layout/BaseLayout'
+import BaseLayout from '@/components/layout/BaseLayout'
 import Link from 'next/link'
 
 type Props = {

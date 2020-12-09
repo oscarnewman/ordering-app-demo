@@ -45,9 +45,9 @@ function Underline({ refs, activeTab, animating, finishAnimating }: Props) {
 
 	return (
 		<motion.div
-			className="underline absolute bottom-0 left-0 w-0 bg-theme-primary"
+			className="absolute bottom-0 left-0 w-4 bg-theme-primary"
 			animate={{ x, width }}
-			style={{ opacity: animating ? 1 : 0, height: 'var(--border-width)' }}
+			style={{ opacity: animating ? 1 : 1, height: 'var(--border-width)' }}
 			onAnimationComplete={finishAnimating}
 		/>
 	)

@@ -16,7 +16,7 @@ const { className: tabsClassName, styles } = css.resolve`
 	}
 `
 
-interface TabItem {
+export interface TabItem {
 	/** The displayed title of the item */
 	title: string
 
@@ -98,6 +98,7 @@ function Tabs({
 	const scrollTarget = useMemo(() => {
 		const tab = tabs.find(({ value }) => value === activeTab)
 		if (!tab || !tab.href) return null
+		if (typeof document === 'undefined') return null
 		return document.getElementById(tab.href.slice(1))
 	}, [activeTab, tabs])
 

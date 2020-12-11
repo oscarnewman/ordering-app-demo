@@ -1,9 +1,14 @@
+import { useEffect } from 'react'
 import { LocationSettingsProvider } from '@/contexts/locationSettings'
 import { MarbleTheme, SharkysTheme } from '@/stories/assets/themes'
+import smoothscroll from 'smoothscroll-polyfill'
 import { withThemes } from 'storybook-addon-themes/react'
 import Layout from './Layout'
 
 function ThemeDecorator({children, themeName}) {
+	useEffect(() => {
+		smoothscroll.polyfill()
+	}, [])
 	let theme = {'Sharkys': SharkysTheme}[themeName]
 	if (!theme) theme = MarbleTheme
 	return <LocationSettingsProvider settings={theme}>{children}</LocationSettingsProvider>

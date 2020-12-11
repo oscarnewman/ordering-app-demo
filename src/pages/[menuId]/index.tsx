@@ -5,26 +5,37 @@ import BaseLayout from '@/components/layout/BaseLayout'
 import Padding from '@/components/layout/LayoutPadding'
 import Nav from '@/components/Nav'
 import Stack from '@/components/ui/Stack'
+import Tabs, { TabItem } from '@/components/ui/Tabs'
 import { generateBaseStaticProps } from '@/utilities/ssg'
 import { useRouter } from 'next/router'
+import { useRef } from 'react'
 import { MenuItem } from '../../components/MenuItem'
 
 export default function Index({ categories, settings }) {
 	const router = useRouter()
 
+	const navRef = useRef(null)
+
 	if (router.isFallback) {
 		return <div>Loading menu...</div>
 	}
+
+	const tabs: TabItem[] = categories.map(category => ({
+		title: category.name,
+		value: category.id,
+		href: `#${category.id}`,
+	}))
 
 	return (
 		<BaseLayout noPadding locationSettings={settings}>
 			<div
 				className="sticky top-0 w-full max-w-lg bg-white z-10 border-b"
 				id="#fixed-nav"
+				ref={navRef}
 			>
 				<Padding>
 					<Nav />
-					<CategoryTabs categories={categories} />
+					<Tabs tabs={tabs} containerRef={navRef} addScrollbarPadding />
 				</Padding>
 			</div>
 			<Padding>

@@ -6,6 +6,26 @@ import Head from 'next/head'
 import { Fragment, ReactNode, useMemo } from 'react'
 import LayoutPadding from './LayoutPadding'
 
+/**
+ * Wraps children in a LocationSettingsProvider if location settings
+ * are provided
+ */
+function PageWrapper({
+	children,
+	locationSettings,
+}: {
+	children: ReactNode
+	locationSettings?: LocationSettings
+}) {
+	return locationSettings ? (
+		<LocationSettingsProvider settings={locationSettings}>
+			{children}
+		</LocationSettingsProvider>
+	) : (
+		<Fragment>{children}</Fragment>
+	)
+}
+
 type Props = StyleProps & {
 	/** The content for the page layout */
 	children: ReactNode
@@ -35,10 +55,8 @@ export default function BaseLayout({
 		return title || locationSettings?.general?.name || 'Marble Order'
 	}, [locationSettings, title])
 
-	const Wrapper = locationSettings ? LocationSettingsProvider : Fragment
-
 	return (
-		<Wrapper settings={locationSettings}>
+		<PageWrapper locationSettings={locationSettings}>
 			<LayoutPadding
 				disabled={noPadding}
 				className={cx('max-w-lg mx-auto relative', className)}
@@ -49,6 +67,6 @@ export default function BaseLayout({
 				</Head>
 				{children}
 			</LayoutPadding>
-		</Wrapper>
+		</PageWrapper>
 	)
 }

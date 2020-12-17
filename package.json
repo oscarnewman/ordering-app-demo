@@ -43,7 +43,7 @@
     "@next/plugin-storybook": "^10.0.3",
     "@storybook/addon-actions": "^6.1.11",
     "@storybook/addon-essentials": "^6.1.11",
-    "@storybook/addon-links": "^6.1.10",
+    "@storybook/addon-links": "^6.1.11",
     "@storybook/react": "^6.1.11",
     "@tailwindcss/forms": "^0.2.1",
     "@tailwindcss/typography": "^0.3.1",

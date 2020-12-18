@@ -34,6 +34,7 @@ export interface Item {
 }
 export interface Subcategory {
 	id: string
+	amount: number
 	name: string
 	image: string
 	items: Item[]

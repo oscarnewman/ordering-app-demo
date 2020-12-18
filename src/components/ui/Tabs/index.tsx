@@ -121,7 +121,7 @@ function Tabs({
 	return (
 		<TargetableScrollingContent
 			className={cx(
-				'relative tabs overflow-x-scroll ',
+				'relative tabs overflow-x-scroll',
 				{ 'pb-4': addScrollbarPadding },
 				tabsClassName,
 				className

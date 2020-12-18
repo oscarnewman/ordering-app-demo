@@ -7,6 +7,9 @@ import smoothscroll from 'smoothscroll-polyfill'
 
 initSentry()
 
+// @ts-ignore
+if (typeof window !== 'undefined') window.__forceSmoothScrollPolyfill__ = true
+
 function MyApp({ Component, pageProps, err }) {
 	useRouteProgressBar()
 

@@ -1,8 +1,9 @@
 import marbleClient from '@/api/client'
 import { getHomepageData, loadNormalizedMenu } from '@/api/menu'
-import CategoryTabs from '@/components/CategoryTabs'
 import BaseLayout from '@/components/layout/BaseLayout'
 import Padding from '@/components/layout/LayoutPadding'
+import ItemThumbnail from '@/components/menu/ItemThumbnail'
+import SubcategoryThumbnail from '@/components/menu/SubcategoryThumbnail'
 import Nav from '@/components/Nav'
 import Stack from '@/components/ui/Stack'
 import Tabs, { TabItem } from '@/components/ui/Tabs'
@@ -39,23 +40,35 @@ export default function Index({ categories, settings }) {
 				</Padding>
 			</div>
 			<Padding>
-				<div className="overflow-y-scroll h-full overflow-scroll">
+				<div>
 					{categories.map(category => (
-						<div key={category.id} id={category.id}>
-							<h2 className="font-bold text-lg sticky top-0 bg-white w-full border-b py-2 ">
+						<div key={category.id} id={category.id} className="pb-10">
+							<h2 className="font-bold text-lg sticky top-0 bg-white w-full py-2 ">
 								{category.name}
 							</h2>
-							<Stack divider>
+							<div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-4 sm:gap-y-10">
 								{!category.useSubcategories &&
 									category.items.map(item => {
-										return <MenuItem key={item.id} item={item} />
+										return (
+											<ItemThumbnail
+												key={item.id}
+												item={item}
+												menuId={router.query.menuId as string}
+											/>
+										)
 									})}
 
 								{category.useSubcategories &&
 									category.subcategories.map(subcategory => {
-										return <MenuItem key={subcategory.id} item={subcategory} />
+										return (
+											<SubcategoryThumbnail
+												key={subcategory.id}
+												subcategory={subcategory}
+												menuId={router.query.menuId as string}
+											/>
+										)
 									})}
-							</Stack>
+							</div>
 						</div>
 					))}
 				</div>

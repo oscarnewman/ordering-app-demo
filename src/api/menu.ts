@@ -10,12 +10,6 @@ export async function getMenu(menuId: string) {
 	return data
 }
 
-export async function loadNormalizedMenu(menuId: string) {
-	const result = await marbleClient.get(`/menus/${menuId}/formatted`)
-	menu = result.data
-	storeNoramlizedMenu(menu)
-}
-
 export function storeNoramlizedMenu(menu: object) {
 	for (const resourceType of Object.keys(menu)) {
 		menuById[resourceType] = {}
@@ -27,6 +21,12 @@ export function storeNoramlizedMenu(menu: object) {
 	}
 }
 
+export async function loadNormalizedMenu(menuId: string) {
+	const result = await marbleClient.get(`/menus/${menuId}/formatted`)
+	menu = result.data
+	storeNoramlizedMenu(menu)
+}
+
 export function getMenuResource(resourceType: string, resourceId: string) {
 	return menuById[resourceType][resourceId]
 }
@@ -35,9 +35,14 @@ export function getHomepageData() {
 	const result = [...menu.categories]
 	return result.map(category => {
 		if (category.useSubcategories)
-			category.subcategories = category.subcategories.map(
-				id => menuById.subcategories[id]
-			)
+			category.subcategories = category.subcategories.map(id => {
+				const subcategory = menuById.subcategories[id]
+				const preselectedItem = menuById.items[subcategory.preselectedItems[0]]
+				if (preselectedItem) {
+					subcategory.amount = preselectedItem.amount
+				}
+				return subcategory
+			})
 		else category.items = category.items.map(id => menuById.items[id])
 
 		return category

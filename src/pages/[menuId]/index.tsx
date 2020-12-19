@@ -2,7 +2,9 @@ import ssgClient from '@/api/client'
 import { getMenu, getMenus } from '@/api/menu'
 import { getCategories } from '@/api/menu/categories'
 import BaseLayout from '@/components/layout/BaseLayout'
-import Padding from '@/components/layout/LayoutPadding'
+import LayoutPadding, {
+	LAYOUT_PADDING_CLASSNAMES,
+} from '@/components/layout/LayoutPadding'
 import ItemThumbnail from '@/components/menu/ItemThumbnail'
 import SubcategoryThumbnail from '@/components/menu/SubcategoryThumbnail'
 import Nav from '@/components/Nav'
@@ -33,12 +35,16 @@ export default function Index({ categories, settings }) {
 				id="#fixed-nav"
 				ref={navRef}
 			>
-				<Padding>
+				<LayoutPadding>
 					<Nav />
-					<Tabs tabs={tabs} containerRef={navRef} />
-				</Padding>
+				</LayoutPadding>
+				<Tabs
+					tabs={tabs}
+					containerRef={navRef}
+					className={LAYOUT_PADDING_CLASSNAMES}
+				/>
 			</div>
-			<Padding>
+			<LayoutPadding>
 				<div>
 					{categories.map(category => (
 						<div key={category.id} id={category.id} className="pb-10">
@@ -69,7 +75,7 @@ export default function Index({ categories, settings }) {
 						</div>
 					))}
 				</div>
-			</Padding>
+			</LayoutPadding>
 		</BaseLayout>
 	)
 }

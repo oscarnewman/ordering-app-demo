@@ -1,5 +1,5 @@
 import Padding from '@/components/layout/LayoutPadding'
-import Nav from '@/components/Nav'
+import Nav from '@/components/ui/Nav'
 import { ReactNode } from 'react'
 
 type Props = {

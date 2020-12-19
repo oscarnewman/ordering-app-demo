@@ -1,6 +1,6 @@
 import { getItem } from '@/api/menu/items'
 import BaseLayout from '@/components/layout/BaseLayout'
-import Nav from '@/components/Nav'
+import Nav from '@/components/ui/Nav'
 import Stack from '@/components/ui/Stack'
 import { generateBaseStaticProps } from '@/utilities/ssg'
 import Image from 'next/image'

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { getSubcategory } from '@/api/menu/subcategories'
-import FixedTopbar from '@/components/FixedTopbar'
+import { getMenus, loadNormalizedMenu } from '@/api/menu'
+import { getAllSubcategoryIds, getSubcategory } from '@/api/menu/subcategories'
+import FixedTopbar from '@/components/ui/FixedTopbar'
 import BaseLayout from '@/components/layout/BaseLayout'
 import Padding from '@/components/layout/LayoutPadding'
 import ModifierSetSelection from '@/components/ModifierSetSelection'
@@ -139,16 +140,17 @@ export const getStaticProps = generateBaseStaticProps(async function (context) {
 })
 
 export async function getStaticPaths() {
-	// const menus = await marbleClient.get('/menus')
-	// const menuId = menus.data.results[0].id
-	// await loadNormalizedMenu(menuId)
-	// const subcategories = getAllSubcategoryIds()
-	// const paths = subcategories.map(subcategoryId => ({
-	// 	params: { menuId, subcategoryId },
-	// }))
+	const menus = await getMenus()
+	const { id } = menus[0]
+
+	await loadNormalizedMenu(id)
+	const subcategories = getAllSubcategoryIds()
+	const paths = subcategories.map(subcategoryId => ({
+		params: { menuId: id, subcategoryId },
+	}))
 
 	return {
-		paths: [],
+		paths,
 		fallback: true,
 	}
 }

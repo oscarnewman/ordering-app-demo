@@ -40,9 +40,6 @@ type Props = StyleProps & {
 	/** Ref to the scrollable container for the tab bar, if necessary */
 	scrollableRef?: RefObject<HTMLElement>
 
-	/** Whether to add additional padding for a scroll bar below the tab bar when it overflows */
-	addScrollbarPadding?: boolean
-
 	/** How much to offset auto-scrolling to content by on the top */
 	offset?: number
 
@@ -63,7 +60,6 @@ function Tabs({
 	scrollableRef,
 	className,
 	style,
-	addScrollbarPadding = false,
 	offset = 0,
 	onChange = _ => {},
 }: Props) {
@@ -121,8 +117,7 @@ function Tabs({
 	return (
 		<TargetableScrollingContent
 			className={cx(
-				'relative tabs overflow-x-scroll',
-				{ 'pb-4': addScrollbarPadding },
+				'relative tabs overflow-x-scroll scrollbars-hidden',
 				tabsClassName,
 				className
 			)}

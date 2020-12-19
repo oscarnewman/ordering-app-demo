@@ -21,7 +21,6 @@ export const Basic = () => (
 export const Overflow = () => (
 	<div className="w-80">
 		<Tabs
-			addScrollbarPadding
 			tabs={[
 				{ title: 'One', value: 'one' },
 				{ title: 'Two', value: 'two' },

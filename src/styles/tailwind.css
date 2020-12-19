@@ -9,3 +9,18 @@
 	--theme-secondary: theme('colors.green.500');
 	--theme-tertiary: theme('colors.yellow.100');
 }
+
+
+@layer utilities {
+	@responsive{
+		/* Hide scrollbar for Chrome, Safari and Opera */
+		.scrollbars-hidden::-webkit-scrollbar {
+			display: none;
+		}
+	
+		.scrollbars-hidden {
+			-ms-overflow-style: none;  /* IE and Edge */
+			scrollbar-width: none;  /* Firefox */
+		}
+	}
+}

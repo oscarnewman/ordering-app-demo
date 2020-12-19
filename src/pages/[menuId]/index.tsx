@@ -36,7 +36,7 @@ export default function Index({ categories, settings }) {
 			>
 				<Padding>
 					<Nav />
-					<Tabs tabs={tabs} containerRef={navRef} addScrollbarPadding />
+					<Tabs tabs={tabs} containerRef={navRef} />
 				</Padding>
 			</div>
 			<Padding>

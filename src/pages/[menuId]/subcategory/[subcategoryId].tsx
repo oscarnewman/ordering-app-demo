@@ -13,12 +13,19 @@ import Error from 'next/error'
 import { useRouter } from 'next/router'
 
 interface Props {
+	/** The subcategory to display */
 	subcategory?: Subcategory
+
+	/** The location settings for this page */
 	settings: LocationSettings
 }
 
 export default function SubcategoryPage({ subcategory, settings }: Props) {
 	const router = useRouter()
+
+	if (!settings) {
+		console.error('AAAAHHHH', router.query)
+	}
 
 	return (
 		<LocationSettingsProvider settings={settings}>

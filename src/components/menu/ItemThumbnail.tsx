@@ -1,4 +1,4 @@
-import { Item } from '@/types/types'
+import { Item } from '@/types/Menu'
 import { formatMinorAmmount } from '@/utilities/currency'
 import BaseThumbnail from './BaseThumbnail'
 

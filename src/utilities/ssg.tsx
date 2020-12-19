@@ -1,4 +1,5 @@
 import { getLocationSettings } from '@/api/location'
+import { loadNormalizedMenu } from '@/api/menu'
 import { GetStaticPropsContext } from 'next'
 
 type CustomGetStaticPropsFunction = (
@@ -14,14 +15,20 @@ type CustomGetStaticPropsFunction = (
  */
 export function generateBaseStaticProps(
 	getStaticProps: CustomGetStaticPropsFunction,
-	revalidate: Number = 1
+	revalidate: number = 1
 ) {
 	return async (context: GetStaticPropsContext) => {
+		if (typeof context.params.menuId !== 'string')
+			throw new Error('A menuId url param is required for this page')
+
 		const menuId = context.params.menuId as string
 
 		const [settings, customStaticProps] = await Promise.all([
 			getLocationSettings(menuId),
-			getStaticProps(context, menuId),
+
+			// Pages which load menu data have an implicit dependency on the normalized menu
+			// being loaded in first
+			loadNormalizedMenu(menuId).then(() => getStaticProps(context, menuId)),
 		])
 
 		return {

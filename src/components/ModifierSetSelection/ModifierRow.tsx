@@ -1,4 +1,4 @@
-import { Modifier } from '@/types/types'
+import { Modifier } from '@/types/Menu'
 import { formatMinorAmmount } from '@/utilities/currency'
 import classNames from 'classnames'
 import { PlusIcon } from '../ui/icons'

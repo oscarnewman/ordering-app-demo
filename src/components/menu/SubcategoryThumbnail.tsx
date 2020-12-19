@@ -1,4 +1,4 @@
-import { Subcategory } from '@/types/types'
+import { Subcategory } from '@/types/Menu'
 import { formatMinorAmmount } from '@/utilities/currency'
 import BaseThumbnail from './BaseThumbnail'
 

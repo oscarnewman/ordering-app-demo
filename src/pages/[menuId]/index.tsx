@@ -1,16 +1,15 @@
-import marbleClient from '@/api/client'
-import { getHomepageData, loadNormalizedMenu } from '@/api/menu'
+import ssgClient from '@/api/client'
+import { getMenu, getMenus } from '@/api/menu'
+import { getCategories } from '@/api/menu/categories'
 import BaseLayout from '@/components/layout/BaseLayout'
 import Padding from '@/components/layout/LayoutPadding'
 import ItemThumbnail from '@/components/menu/ItemThumbnail'
 import SubcategoryThumbnail from '@/components/menu/SubcategoryThumbnail'
 import Nav from '@/components/Nav'
-import Stack from '@/components/ui/Stack'
 import Tabs, { TabItem } from '@/components/ui/Tabs'
 import { generateBaseStaticProps } from '@/utilities/ssg'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { MenuItem } from '../../components/MenuItem'
 
 export default function Index({ categories, settings }) {
 	const router = useRouter()
@@ -47,27 +46,25 @@ export default function Index({ categories, settings }) {
 								{category.name}
 							</h2>
 							<div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-4 sm:gap-y-10">
-								{!category.useSubcategories &&
-									category.items.map(item => {
-										return (
-											<ItemThumbnail
-												key={item.id}
-												item={item}
-												menuId={router.query.menuId as string}
-											/>
-										)
-									})}
-
-								{category.useSubcategories &&
-									category.subcategories.map(subcategory => {
-										return (
-											<SubcategoryThumbnail
-												key={subcategory.id}
-												subcategory={subcategory}
-												menuId={router.query.menuId as string}
-											/>
-										)
-									})}
+								{category.useSubcategories
+									? category.subcategories.map(subcategory => {
+											return (
+												<SubcategoryThumbnail
+													key={subcategory.id}
+													subcategory={subcategory}
+													menuId={router.query.menuId as string}
+												/>
+											)
+									  })
+									: category.items.map(item => {
+											return (
+												<ItemThumbnail
+													key={item.id}
+													item={item}
+													menuId={router.query.menuId as string}
+												/>
+											)
+									  })}
 							</div>
 						</div>
 					))}
@@ -77,23 +74,22 @@ export default function Index({ categories, settings }) {
 	)
 }
 
-export const getStaticProps = generateBaseStaticProps(async (_, menuId) => {
-	await loadNormalizedMenu(menuId)
+export const getStaticProps = generateBaseStaticProps(async function () {
 	return {
-		categories: getHomepageData(),
+		categories: getCategories(),
 	}
 })
 
 export async function getStaticPaths() {
-	const menus = await marbleClient.get('/menus')
-	const paths = menus.data.results.map(result => ({
+	const menus = await getMenus()
+	const paths = menus.map(menu => ({
 		params: {
-			menuId: result.id,
+			menuId: menu.id,
 		},
 	}))
 
 	return {
-		paths: paths,
+		paths,
 		fallback: false,
 	}
 }

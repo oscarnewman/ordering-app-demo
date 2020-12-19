@@ -1,19 +1,71 @@
-import { schema } from 'normalizr'
+import {
+	Category,
+	Discount,
+	Item,
+	Modifier,
+	ModifierSet,
+	Subcategory,
+} from '@/types/Menu'
+import { schema } from '@oscarnewman/normalizr'
 
-const category = new schema.Entity('categories')
-const modifier = new schema.Entity('modifiers')
-const modifierSet = new schema.Entity('modifierSets', {
+/**
+ * Marble modifiers
+ */
+const modifier = new schema.Entity<Modifier>('modifiers')
+
+/**
+ * Marble modifier sets
+ */
+const modifierSet = new schema.Entity<ModifierSet>('modifierSets', {
 	modifiers: [modifier],
 })
-const item = new schema.Entity('items', {
+
+/**
+ * Marble menu items
+ */
+const item = new schema.Entity<Item>('items', {
 	modifierSets: [modifierSet],
 })
-const subcategory = new schema.Entity('subcategories', {
+
+/**
+ * Marble menu subcategories
+ */
+const subcategory = new schema.Entity<Subcategory>(
+	'subcategories',
+	{
+		items: [item],
+		preselectedItems: [item],
+	},
+	{
+		// We want to bake the first preselected item's cost into the
+		// subcategory, if it exists, so we don't need to include all
+		// items unlcess it's strictly necessary
+		denormalizeProcessStrategy(subcategory) {
+			if (subcategory.preselectedItems?.length > 0) {
+				const preselectedItem = subcategory.preselectedItems[0]
+				if (preselectedItem?.amount) subcategory.amount = preselectedItem.amount
+			}
+			return subcategory
+		},
+	}
+)
+
+/**
+ * Marble menu discounts
+ */
+const discount = new schema.Entity<Discount>('discounts')
+
+/**
+ * Marble menu categories
+ */
+const category = new schema.Entity<Category>('categories', {
+	subcategories: [subcategory],
 	items: [item],
 })
 
-const discount = new schema.Entity('discounts')
-
+/**
+ * The total Marble menu schema
+ */
 export const marbleSchema = {
 	categories: [category],
 	items: [item],

@@ -2,6 +2,12 @@ import { cx } from '@/utilities/classes'
 import { StyleProps } from '@/utilities/styleProps'
 import { ReactNode } from 'react'
 
+/**
+ * Tailwind classnames to apply when we need to granularly apply layout
+ * padding elsewhere. Should be *SELDOM* used.
+ */
+export const LAYOUT_PADDING_CLASSNAMES = 'px-4 content-lg:px-0'
+
 type Props = StyleProps & {
 	/** The content for the padded container */
 	children: ReactNode
@@ -22,7 +28,7 @@ function LayoutPadding({
 }: Props) {
 	return (
 		<div
-			className={cx({ 'px-4 content-lg:px-0': !disabled }, className)}
+			className={cx({ [LAYOUT_PADDING_CLASSNAMES]: !disabled }, className)}
 			style={style}
 		>
 			{children}

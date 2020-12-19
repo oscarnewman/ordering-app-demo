@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { ArrowLeftIcon, ShoppingBagIcon } from './icons'
 import Icon from './icons/Icon'
 import Logo from './Logo'
 

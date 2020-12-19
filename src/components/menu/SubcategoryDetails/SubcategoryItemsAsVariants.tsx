@@ -10,9 +10,13 @@ import ItemOrderOptions from '../ItemOrderOptions'
 import VariantSelector from '../VariantSelector'
 
 type Props = {
+	/** The subcategory to display */
 	subcategory: Subcategory
 }
 
+/**
+ * Renders a subcategory as an item selection page where it's own items are variants
+ */
 function SubcategoryItemsAsVariants({ subcategory }: Props) {
 	const [itemId, setItemId] = useState(subcategory.items[0].id)
 

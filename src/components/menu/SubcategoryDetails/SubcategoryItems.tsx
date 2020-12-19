@@ -1,28 +1,25 @@
 import { useMenuId } from '@/hooks/useMenuId'
-import { CartUpdate } from '@/types/Cart'
 import { Subcategory } from '@/types/Menu'
-import { formatMinorAmmount } from '@/utilities/currency'
-import { useMemo, useState } from 'react'
 import LayoutPadding from '../../layout/LayoutPadding'
-import { ArrowRightIcon } from '../../ui/icons'
 import Stack from '../../ui/Stack'
-import ItemDetailsHeader from '../ItemDetailsHeader'
-import ItemOrderOptions from '../ItemOrderOptions'
 import ItemThumbnail from '../thumbnail/ItemThumbnail'
-import VariantSelector from '../VariantSelector'
 
 type Props = {
+	/** The subcategory to display */
 	subcategory: Subcategory
 }
 
+/**
+ * Renders the items of a subcategory in a grid
+ */
 function SubcategoryItems({ subcategory }: Props) {
 	const menuId = useMenuId()
 
 	return (
 		<LayoutPadding>
-			<Stack space={8} className="h-full">
-				<h2>{subcategory.name}</h2>
-				<div className="grid grid-cols-2">
+			<Stack space={4} className="h-full">
+				<h2 className="font-bold text-lg">{subcategory.name}</h2>
+				<div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-4 sm:gap-y-10">
 					{subcategory.items.map(item => (
 						<ItemThumbnail key={item.id} item={item} menuId={menuId} />
 					))}

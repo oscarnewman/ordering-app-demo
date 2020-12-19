@@ -8,6 +8,10 @@ type Props = {
 	subcategory: Subcategory
 }
 
+/**
+ * Displays the correct subcategory page type depending on whether items
+ * displayed as variants (determiend by whether the subcategory has the `amount` key)
+ */
 function SubcategoryDetails({ subcategory }: Props) {
 	const displayItemsAsVariants = useMemo(
 		() =>

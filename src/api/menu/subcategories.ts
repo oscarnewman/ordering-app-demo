@@ -17,5 +17,9 @@ export function getAllSubcategoryIds() {
  * @param subcategoryId The subcategory to retrieve's ID
  */
 export function getSubcategory(subcategoryId: string) {
-	return hydrate<Subcategory>('subcategories', subcategoryId)
+	try {
+		return hydrate<Subcategory>('subcategories', subcategoryId)
+	} catch {
+		return null
+	}
 }

@@ -1,6 +1,6 @@
 import { ModifierSet } from '@/types/Menu'
 import { useCallback, useEffect, useState } from 'react'
-import Stack from '../ui/Stack'
+import Stack from '../../ui/Stack'
 import ModifierRow from './ModifierRow'
 
 interface Props {
@@ -41,7 +41,8 @@ const ModifierSetSelection = ({ modifierSet, onSelect }: Props) => {
 	// Trigger onSelect callback
 	useEffect(() => {
 		onSelect(selected)
-	}, [onSelect, selected])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selected])
 
 	return (
 		<Stack space={4}>

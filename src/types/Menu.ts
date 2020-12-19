@@ -36,6 +36,7 @@ export interface Subcategory {
 	id: string
 	amount: number
 	name: string
+	description: string
 	image: string
 	items: Item[]
 	maxQuantity?: number

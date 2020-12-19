@@ -23,6 +23,8 @@ interface Props {
 export default function SubcategoryPage({ subcategory, settings }: Props) {
 	const router = useRouter()
 
+	if (router.isFallback) return <div>Loading...</div>
+
 	if (!settings) {
 		console.error('AAAAHHHH', router.query)
 	}

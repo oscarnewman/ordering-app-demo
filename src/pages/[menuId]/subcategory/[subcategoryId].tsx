@@ -25,10 +25,6 @@ export default function SubcategoryPage({ subcategory, settings }: Props) {
 
 	if (router.isFallback) return <div>Loading...</div>
 
-	if (!settings) {
-		console.error('AAAAHHHH', router.query)
-	}
-
 	return (
 		<LocationSettingsProvider settings={settings}>
 			<Stack space={6}>

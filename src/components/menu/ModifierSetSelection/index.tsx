@@ -20,8 +20,12 @@ const ModifierSetSelection = ({ modifierSet, onSelect }: Props) => {
 
 	const handleClick = modifierId => {
 		// This works like a regular single-select radio group
-		if (modifierSet.max === 1 && modifierSet.min === 1) {
-			setSelected([modifierId])
+		if (modifierSet.max === 1) {
+			if (isSelected(modifierId) && selected.length > modifierSet.min) {
+				setSelected(selected.filter(id => id !== modifierId))
+			} else {
+				setSelected([modifierId])
+			}
 		}
 
 		// Removing a modifier

@@ -40,7 +40,7 @@ export interface Subcategory {
 	image: string
 	items: Item[]
 	maxQuantity?: number
-	preselectedItems: string[]
+	preselectedItems: Item[]
 }
 export interface Category {
 	id: string

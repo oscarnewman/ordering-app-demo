@@ -2,9 +2,16 @@ import { cx } from '@/utilities/classes'
 import { forwardRef, RefObject } from 'react'
 
 type Props = {
+	/** The display name of the tab */
 	name: string
+
+	/** Whether the tab is selected */
 	active?: boolean
+
+	/** Whether the underline is animating currently */
 	animating: boolean
+
+	/** Handler for when the tab is clicked */
 	onClick: () => void
 }
 

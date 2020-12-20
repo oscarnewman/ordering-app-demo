@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const nextConfig = require('../next.config')
 
 module.exports = {
 	reactOptions: {
@@ -34,6 +36,9 @@ module.exports = {
 	},
 	webpackFinal: async config => {
 		config.resolve.plugins.push(new TSConfigPathsPlugin());
+		config.plugins.push(new webpack.DefinePlugin({
+			'process.env.__NEXT_IMAGE_OPTS': JSON.stringify(nextConfig.images) 
+		}));
     return config;
 	},
 }

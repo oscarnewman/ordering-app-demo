@@ -1,10 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import marbleClient from '@/api/client'
-import {
-	getAllSubcategoryIds,
-	getSubcategoryData,
-	loadNormalizedMenu,
-} from '@/api/menu'
+import { getSubcategory } from '@/api/menu/subcategories'
 import FixedTopbar from '@/components/FixedTopbar'
 import BaseLayout from '@/components/layout/BaseLayout'
 import Padding from '@/components/layout/LayoutPadding'
@@ -136,27 +131,24 @@ export default function Subcategory({ subcategory, settings }) {
 		</BaseLayout>
 	)
 }
-export const getStaticProps = generateBaseStaticProps(
-	async (context, menuId) => {
-		await loadNormalizedMenu(menuId)
-		const { subcategoryId } = context.params
-		return {
-			subcategory: getSubcategoryData(subcategoryId),
-		}
+export const getStaticProps = generateBaseStaticProps(async function (context) {
+	const subcategoryId = context.params.subcategoryId as string
+	return {
+		subcategory: getSubcategory(subcategoryId),
 	}
-)
+})
 
 export async function getStaticPaths() {
-	const menus = await marbleClient.get('/menus')
-	const menuId = menus.data.results[0].id
-	await loadNormalizedMenu(menuId)
-	const subcategories = getAllSubcategoryIds()
-	const paths = subcategories.map(subcategoryId => ({
-		params: { menuId, subcategoryId },
-	}))
+	// const menus = await marbleClient.get('/menus')
+	// const menuId = menus.data.results[0].id
+	// await loadNormalizedMenu(menuId)
+	// const subcategories = getAllSubcategoryIds()
+	// const paths = subcategories.map(subcategoryId => ({
+	// 	params: { menuId, subcategoryId },
+	// }))
 
 	return {
-		paths,
+		paths: [],
 		fallback: true,
 	}
 }

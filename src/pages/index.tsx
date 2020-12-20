@@ -1,4 +1,5 @@
-import marbleClient from '@/api/client'
+import ssgClient from '@/api/client'
+import { getMenus } from '@/api/menu'
 import BaseLayout from '@/components/layout/BaseLayout'
 import Link from 'next/link'
 
@@ -33,10 +34,9 @@ function Index({ menus }: Props) {
 }
 
 export async function getStaticProps() {
-	const menus = await marbleClient.get('/menus')
 	return {
 		props: {
-			menus: menus.data.results,
+			menus: await getMenus(),
 		},
 	}
 }

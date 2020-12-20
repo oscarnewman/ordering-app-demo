@@ -14,9 +14,11 @@ export const baseHeaders = {
 }
 
 /**
- * This function creates a custom instance of axios so we can make a request to the Marble server.
+ * This is a client for BUILD-TIME DATA LOADING. It only has read access to menu and location
+ * settings data. It *should not* be used for any session, cart, or order requests (or anything
+ * in browser, for that matter).
  */
-export const marbleClient = axios.create({
+export const ssgClient = axios.create({
 	baseURL: process.env.MARBLE_API_URL,
 	headers: baseHeaders,
 })
@@ -25,7 +27,7 @@ export const marbleClient = axios.create({
  * This make sure we have an access token before making any request
  * by authenticating with our secret device code from .env
  */
-marbleClient.interceptors.request.use(async config => {
+ssgClient.interceptors.request.use(async config => {
 	if (!ACCESS_TOKEN) {
 		const token = await authenticateMenuRetrieval()
 		ACCESS_TOKEN = token
@@ -34,4 +36,4 @@ marbleClient.interceptors.request.use(async config => {
 	return config
 })
 
-export default marbleClient
+export default ssgClient

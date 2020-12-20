@@ -1,4 +1,4 @@
-import { getItemData } from '@/api/menu'
+import { getItem } from '@/api/menu/items'
 import BaseLayout from '@/components/layout/BaseLayout'
 import Nav from '@/components/Nav'
 import Stack from '@/components/ui/Stack'
@@ -41,11 +41,11 @@ export default function Item({ item, settings }) {
 	)
 }
 
-export const getStaticProps = generateBaseStaticProps(context => {
-	const { itemId } = context.params
+export const getStaticProps = generateBaseStaticProps(function (context) {
+	const itemId = context.params.itemId as string
 
 	return {
-		item: getItemData(itemId),
+		item: getItem(itemId),
 	}
 })
 

@@ -42,6 +42,7 @@ module.exports = {
 	},
 	variants: {
 		borderWidth: ['hover'],
+		borderColor: ['group-focus'],
 	},
 	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }

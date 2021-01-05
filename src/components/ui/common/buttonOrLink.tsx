@@ -1,37 +1,55 @@
-import React, { useMemo, useCallback } from 'react'
+import { cx } from '@/utilities/classes'
+import { StyleProps } from '@/utilities/styleProps'
 import Link from 'next/link'
+import React, { MouseEvent, ReactNode, useCallback } from 'react'
+import Spinner from '../Spinner'
 
 export type ButtonOrLinkTypes = HTMLAnchorElement | HTMLButtonElement
 
-export type ButtonOrLinkProps = {
-	[prop: string]: unknown
+export type ButtonOrLinkProps = StyleProps & {
 	/** Icon to display at the end the content. */
-	afterIcon?: React.ReactNode
+	leadingIcon?: ReactNode
+
 	/** Icon to display at the start the content. */
-	beforeIcon?: React.ReactNode
+	trailingIcon?: ReactNode
+
 	/** Content within the button or link. */
-	children: NonNullable<React.ReactNode>
+	children: NonNullable<ReactNode>
+
 	/** Whether the element is disabled. */
 	disabled?: boolean
+
 	/** Render as an anchor link with a URL. */
 	href?: string
+
 	/** Whether the element is loading. */
 	loading?: boolean
+
 	/** Callback fired when the element is clicked. */
-	onClick?: (event: React.MouseEvent<ButtonOrLinkTypes>) => void
+	onClick?: (event: MouseEvent<ButtonOrLinkTypes>) => void
+
 	/** Callback fired when the element is released. */
-	onMouseUp?: (event: React.MouseEvent<ButtonOrLinkTypes>) => void
+	onMouseUp?: (event: MouseEvent<ButtonOrLinkTypes>) => void
+
 	/** When a link, open the target in a new window. */
 	openInNewWindow?: boolean
+
 	/** Rel attribute override for if the component has an href */
 	rel?: string
+
 	/** When a button, the type of button. */
 	type?: 'button' | 'submit' | 'reset'
+
+	/** The classname to apply to the spinner */
+	spinnerClass?: string
+
+	/** The class name to apply to the inner content of the button */
+	contentClass?: string
 }
 
-const ButtonOrLink: React.SFC<ButtonOrLinkProps> = ({
-	afterIcon,
-	beforeIcon,
+function ButtonOrLink({
+	leadingIcon,
+	trailingIcon,
 	children,
 	disabled,
 	href,
@@ -41,11 +59,13 @@ const ButtonOrLink: React.SFC<ButtonOrLinkProps> = ({
 	openInNewWindow,
 	rel,
 	type = 'button',
+	spinnerClass,
+	contentClass = 'flex justify-between',
 	...restProps
-}) => {
+}: ButtonOrLinkProps) {
 	// Intercept click to handle disabled state
 	const handleClick = useCallback(
-		(event: React.MouseEvent<ButtonOrLinkTypes>) => {
+		(event: MouseEvent<ButtonOrLinkTypes>) => {
 			if (disabled) event.preventDefault()
 			else if (onClick) onClick(event)
 		},
@@ -53,17 +73,17 @@ const ButtonOrLink: React.SFC<ButtonOrLinkProps> = ({
 	)
 
 	const handleMouseUp = useCallback(
-		(event: React.MouseEvent<ButtonOrLinkTypes>) => {
+		(event: MouseEvent<ButtonOrLinkTypes>) => {
 			if (onMouseUp) onMouseUp(event)
 		},
 		[onMouseUp]
 	)
 
+	// eslint-disable-next-line no-undef
 	const props: JSX.IntrinsicElements['a'] & JSX.IntrinsicElements['button'] = {}
 
 	// Determine props based on element type
 	if (href) {
-		// props.href = href
 		props.rel = rel
 
 		if (openInNewWindow) {
@@ -79,17 +99,24 @@ const ButtonOrLink: React.SFC<ButtonOrLinkProps> = ({
 				<a
 					{...props}
 					{...restProps}
+					aria-busy={loading}
 					onClick={handleClick}
-					onMouseUp={onMouseUp}
+					onMouseUp={handleMouseUp}
 				>
-					{!loading && beforeIcon && beforeIcon}
-					<span>{children}</span>
-					{!loading && afterIcon && afterIcon}
+					{loading ? (
+						<Spinner className={spinnerClass} size={20} />
+					) : (
+						<>
+							{leadingIcon && leadingIcon}
+							<span>{children}</span>
+							{trailingIcon && trailingIcon}
+						</>
+					)}
 				</a>
 			</Link>
 		)
 	} else {
-		props.disabled = disabled || loading || false
+		props.disabled = disabled || loading
 		props.type = type || 'button'
 	}
 
@@ -97,12 +124,29 @@ const ButtonOrLink: React.SFC<ButtonOrLinkProps> = ({
 		<button
 			{...restProps}
 			{...props}
+			aria-busy={loading}
 			onClick={handleClick}
-			onMouseUp={onMouseUp}
+			onMouseUp={handleMouseUp}
 		>
-			{!loading && beforeIcon && beforeIcon}
-			<span>{children}</span>
-			{!loading && afterIcon && afterIcon}
+			<div className="relative w-full h-full">
+				<div className={cx({ invisible: loading }, contentClass)}>
+					<span className="flex items-center">
+						{leadingIcon && leadingIcon}
+					</span>
+					<span>{children}</span>
+					<span className="flex items-center">
+						{trailingIcon && trailingIcon}
+					</span>
+				</div>
+				<div
+					className={cx(
+						'absolute w-full h-full top-0 grid place-items-center',
+						{ hidden: !loading }
+					)}
+				>
+					<Spinner className={spinnerClass} size={20} />
+				</div>
+			</div>
 		</button>
 	)
 }

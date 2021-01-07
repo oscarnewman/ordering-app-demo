@@ -1,13 +1,12 @@
-import ssgClient from '@/api/client'
-import { getMenu, getMenus } from '@/api/menu'
+import { getMenus } from '@/api/menu'
 import { getCategories } from '@/api/menu/categories'
 import BaseLayout from '@/components/layout/BaseLayout'
 import LayoutPadding, {
 	LAYOUT_PADDING_CLASSNAMES,
 } from '@/components/layout/LayoutPadding'
-import ItemThumbnail from '@/components/menu/ItemThumbnail'
-import SubcategoryThumbnail from '@/components/menu/SubcategoryThumbnail'
-import Nav from '@/components/Nav'
+import ItemThumbnail from '@/components/menu/thumbnail/ItemThumbnail'
+import SubcategoryThumbnail from '@/components/menu/thumbnail/SubcategoryThumbnail'
+import Nav from '@/components/ui/Nav'
 import Tabs, { TabItem } from '@/components/ui/Tabs'
 import { generateBaseStaticProps } from '@/utilities/ssg'
 import { useRouter } from 'next/router'

@@ -23,6 +23,9 @@ export function LocationSettingsProvider({
 	settings,
 	children,
 }: ThemeProvderProps) {
+	if (!settings)
+		throw new Error('An invalid location settings object was supplied')
+
 	return (
 		<LocationSettingsContext.Provider value={settings}>
 			{children}

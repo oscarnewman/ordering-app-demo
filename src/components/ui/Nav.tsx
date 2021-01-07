@@ -1,8 +1,6 @@
 import Link from 'next/link'
-import LayoutPadding from './layout/LayoutPadding'
-import { ArrowLeftIcon, ShoppingBagIcon } from './ui/icons'
-import Icon from './ui/icons/Icon'
-import Logo from './ui/Logo'
+import Icon from './icons/Icon'
+import Logo from './Logo'
 
 interface Props {
 	back?: boolean

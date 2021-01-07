@@ -19,7 +19,7 @@ function ItemThumbnail({ item, menuId }: Props) {
 			title={item.name}
 			subtitle={formatMinorAmmount(item.amount)}
 			image={item.image}
-			href={`${menuId}/item/${item.id}`}
+			href={`/${menuId}/item/${item.id}`}
 		/>
 	)
 }

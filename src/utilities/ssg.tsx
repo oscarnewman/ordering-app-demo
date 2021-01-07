@@ -31,6 +31,9 @@ export function generateBaseStaticProps(
 			loadNormalizedMenu(menuId).then(() => getStaticProps(context, menuId)),
 		])
 
+		if (!settings)
+			throw new Error('Unable to load brand settings for this page')
+
 		return {
 			props: {
 				settings,

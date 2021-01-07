@@ -1,4 +1,4 @@
-import BaseThumbnail from '@/components/menu/BaseThumbnail'
+import BaseThumbnail from '@/components/menu/thumbnail/BaseThumbnail'
 import { Meta } from '@storybook/react'
 
 export default {

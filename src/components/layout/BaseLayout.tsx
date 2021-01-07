@@ -59,7 +59,7 @@ export default function BaseLayout({
 		<PageWrapper locationSettings={locationSettings}>
 			<LayoutPadding
 				disabled={noPadding}
-				className={cx('max-w-lg mx-auto relative', className)}
+				className={cx('max-w-lg mx-auto relative w-full', className)}
 				style={style}
 			>
 				<Head>
